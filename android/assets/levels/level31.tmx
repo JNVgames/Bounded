@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="156">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="121" x="337" y="38" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="132" x="892" y="694" width="80" height="20"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="151" x="386" y="18" width="120" height="40" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="key">
+  <object id="144" x="277" y="269" width="30" height="60"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="wall">
+  <object id="150" x="765" y="442" width="278" height="10" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud"/>
+ <objectgroup color="#55007f" name="blackhole">
+  <object id="124" x="581" y="365" width="350" height="350">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ffff" name="magnet">
+  <object id="125" x="915" y="357" width="350" height="350">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffff00" name="teleporter"/>
+ <objectgroup name="fan">
+  <object id="141" x="16" y="712" width="50" height="150" rotation="270"/>
+  <object id="142" x="261" y="711" width="50" height="150" rotation="270"/>
+  <object id="143" x="496" y="712" width="50" height="150" rotation="270"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="Boundary" opacity="0.9">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,1 1281,721 1,724 -1,0"/>
+  </object>
+  <object id="123" x="1280" y="720">
+   <polyline points="0,0 -4,720 -1278,716 -1278,8"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="laser">
+  <object id="112" x="133" y="360" width="306" height="10"/>
+  <object id="154" x="455" y="5" width="366" height="10" rotation="90"/>
+  <object id="155" x="132" y="164" width="209" height="10" rotation="90"/>
+ </objectgroup>
+</map>

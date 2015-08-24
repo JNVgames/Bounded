@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="249">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="131" x="113" y="24" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="226" x="1269" y="687" width="20" height="80" rotation="90">
+   <properties>
+    <property name="target" value="6"/>
+    <property name="tpNum" value="5"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow"/>
+ <objectgroup color="#ff5500" name="key"/>
+ <objectgroup color="#00ff00" name="wall">
+  <object id="129" x="8" y="256" width="284" height="10"/>
+  <object id="212" x="306" y="5" width="259" height="10" rotation="90"/>
+  <object id="247" x="546" y="4" width="308" height="10" rotation="90"/>
+  <object id="248" x="832" y="393" width="317" height="10" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud">
+  <object id="143" x="18" y="552" width="146" height="46"/>
+ </objectgroup>
+ <objectgroup color="#55007f" name="blackhole">
+  <object id="197" x="436" y="115" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="218" x="222" y="522" width="125" height="125">
+   <ellipse/>
+  </object>
+  <object id="235" x="713" y="53" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="236" x="605" y="300" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="237" x="394" y="441" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="238" x="868" y="276" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="239" x="728" y="511" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="240" x="987" y="49" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="241" x="999" y="485" width="200" height="200">
+   <ellipse/>
+  </object>
+  <object id="242" x="1115" y="254" width="200" height="200">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ffff" name="magnet">
+  <object id="217" x="148" y="402" width="125" height="125">
+   <ellipse/>
+  </object>
+  <object id="220" x="21" y="270" width="125" height="125">
+   <ellipse/>
+  </object>
+  <object id="221" x="-3" y="625" width="125" height="125">
+   <ellipse/>
+  </object>
+  <object id="222" x="182" y="620" width="125" height="125">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffff00" name="teleporter">
+  <object id="132" x="8" y="246" width="20" height="80" rotation="270">
+   <properties>
+    <property name="target" value="2"/>
+    <property name="tpNum" value="1"/>
+   </properties>
+  </object>
+  <object id="133" x="197" y="246" width="20" height="80" rotation="270">
+   <properties>
+    <property name="target" value="4"/>
+    <property name="tpNum" value="3"/>
+   </properties>
+  </object>
+  <object id="135" x="284" y="357" width="20" height="80" rotation="180">
+   <properties>
+    <property name="target" value="1"/>
+    <property name="tpNum" value="2"/>
+   </properties>
+  </object>
+  <object id="136" x="455" y="11" width="20" height="80" rotation="90">
+   <properties>
+    <property name="target" value="3"/>
+    <property name="tpNum" value="4"/>
+   </properties>
+  </object>
+  <object id="224" x="103" y="589" width="20" height="80" rotation="90">
+   <properties>
+    <property name="target" value="5"/>
+    <property name="tpNum" value="6"/>
+   </properties>
+  </object>
+  <object id="225" x="1271" y="13" width="20" height="80" rotation="90">
+   <properties>
+    <property name="target" value="6"/>
+    <property name="tpNum" value="5"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="fan">
+  <object id="171" x="543" y="712" width="50" height="150" rotation="270">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="228" x="310" y="307" width="50" height="150">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="229" x="310" y="525" width="50" height="150">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="230" x="908" y="717" width="50" height="150" rotation="270">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="231" x="701" y="4" width="50" height="150" rotation="90">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="232" x="1042" y="5" width="50" height="150" rotation="90">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="Boundary" opacity="0.9">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,1 1281,721 1,724 -1,0"/>
+  </object>
+  <object id="103" x="1279" y="0">
+   <polyline points="0,0 1279,3 1282,1436 -1279,1439 -1279,727"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="laser">
+  <object id="142" x="16" y="277" width="171.12" height="9" rotation="30"/>
+  <object id="146" x="120" y="467" width="176.82" height="9" rotation="-5"/>
+  <object id="160" x="306" y="266" width="451" height="10" rotation="90"/>
+  <object id="214" x="5" y="566" width="146.926" height="9" rotation="5"/>
+  <object id="215" x="7" y="708" width="283.82" height="9"/>
+  <object id="216" x="16" y="268" width="444" height="9" rotation="90"/>
+ </objectgroup>
+</map>

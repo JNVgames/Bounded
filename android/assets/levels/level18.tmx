@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="95">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="88" x="51" y="625" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="89" x="1272" y="31" width="80" height="20" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="91" x="55.3007" y="700.754" width="150" height="40" rotation="270">
+   <properties>
+    <property name="impulseLevel" value="6"/>
+   </properties>
+  </object>
+  <object id="92" x="37" y="48" width="150" height="40">
+   <properties>
+    <property name="impulseLevel" value="8"/>
+   </properties>
+  </object>
+  <object id="93" x="496" y="34" width="150" height="40" rotation="90">
+   <properties>
+    <property name="impulseLevel" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="key">
+  <object id="94" x="469" y="570" width="30" height="60"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="wall">
+  <object id="84" x="349" y="212" width="500" height="10" rotation="90"/>
+  <object id="86" x="1130" y="148" width="150" height="10"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud"/>
+ <objectgroup color="#55007f" name="blackhole"/>
+ <objectgroup color="#00ffff" name="magnet"/>
+ <objectgroup color="#ffff00" name="teleporter"/>
+ <objectgroup name="fan">
+  <object id="78" x="654" y="714" width="50" height="150" rotation="270"/>
+  <object id="79" x="881" y="717" width="50" height="150" rotation="270"/>
+  <object id="80" x="1130" y="720" width="50" height="150" rotation="270"/>
+  <object id="81" x="355" y="335" width="50" height="150"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="Boundary">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,0 1280,720 0,720 0,0"/>
+  </object>
+ </objectgroup>
+</map>

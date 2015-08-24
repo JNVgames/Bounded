@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="131">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="47" x="64" y="651" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="49" x="811" y="564" width="80" height="20"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="51" x="29" y="657" width="120" height="40">
+   <properties>
+    <property name="impulseScale" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="key">
+  <object id="52" x="45" y="386" width="30" height="60"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="wall">
+  <object id="128" x="948" y="736" width="200" height="10" rotation="-30">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud"/>
+ <objectgroup color="#55007f" name="blackhole">
+  <object id="116" x="283" y="253" width="300" height="300">
+   <ellipse/>
+  </object>
+  <object id="117" x="590" y="39" width="300" height="300">
+   <ellipse/>
+  </object>
+  <object id="121" x="0" y="6" width="300" height="300">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ffff" name="magnet"/>
+ <objectgroup color="#ffff00" name="teleporter"/>
+ <objectgroup name="fan">
+  <object id="75" x="1124" y="713" width="50" height="150" rotation="270">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="113" x="1279" y="154" width="50" height="150" rotation="180">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="130" x="1280" y="441" width="50" height="150" rotation="180">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="Boundary" opacity="0.9">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,1 1281,721 1,724 -1,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="laser">
+  <object id="97" x="8" y="609" width="300" height="10"/>
+  <object id="103" x="314" y="610" width="300" height="10"/>
+  <object id="104" x="620" y="610" width="300" height="10"/>
+  <object id="105" x="934" y="364" width="255" height="10" rotation="90"/>
+  <object id="109" x="935" y="105" width="255" height="10" rotation="90"/>
+ </objectgroup>
+</map>

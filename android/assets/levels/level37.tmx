@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="105">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="98" x="18" y="21" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="96" x="121" y="690" width="80" height="20"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="92" x="602" y="297" width="150" height="40" rotation="135">
+   <properties>
+    <property name="impulseLevel" value="6"/>
+   </properties>
+  </object>
+  <object id="93" x="315" y="89" width="150" height="40" rotation="30">
+   <properties>
+    <property name="impulseLevel" value="6"/>
+   </properties>
+  </object>
+  <object id="94" x="382" y="584" width="150" height="40" rotation="180">
+   <properties>
+    <property name="impulseLevel" value="10"/>
+   </properties>
+  </object>
+  <object id="102" x="741" y="121" width="150" height="40" rotation="35">
+   <properties>
+    <property name="impulseLevel" value="6"/>
+   </properties>
+  </object>
+  <object id="104" x="1082" y="430" width="150" height="40" rotation="180">
+   <properties>
+    <property name="impulseLevel" value="10"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="key">
+  <object id="100" x="877" y="194" width="30" height="60"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" draworder="index" name="wall">
+  <object id="77" x="629" y="0" width="720" height="10" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud">
+  <object id="78" x="677" y="7" width="599" height="141"/>
+  <object id="80" x="675" y="583" width="600" height="128"/>
+  <object id="83" x="673" y="158" width="598" height="115"/>
+ </objectgroup>
+ <objectgroup color="#55007f" name="blackhole">
+  <object id="88" x="634" y="389" width="350" height="350">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ffff" name="magnet"/>
+ <objectgroup color="#ffff00" name="teleporter">
+  <object id="87" x="1275" y="441" width="20" height="80" rotation="180">
+   <properties>
+    <property name="target" value="1"/>
+    <property name="tpNum" value="2"/>
+   </properties>
+  </object>
+  <object id="95" x="7" y="532" width="20" height="80">
+   <properties>
+    <property name="target" value="2"/>
+    <property name="tpNum" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="fan">
+  <object id="97" x="9" y="328" width="300" height="150"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="Boundary">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,0 1280,720 0,720 0,0"/>
+  </object>
+ </objectgroup>
+</map>

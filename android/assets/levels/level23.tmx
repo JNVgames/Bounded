@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="249">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="212" x="41" y="59" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="246" x="657" y="242" width="80" height="20" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="214" x="228" y="370" width="120" height="40" rotation="270"/>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="key"/>
+ <objectgroup color="#00ff00" name="wall">
+  <object id="238" x="626" y="188" width="520" height="10" rotation="90"/>
+  <object id="239" x="150" y="8" width="395" height="10" rotation="90"/>
+  <object id="240" x="323" y="170" width="676" height="10"/>
+  <object id="242" x="139" y="409" width="133" height="10"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud">
+  <object id="243" x="427" y="121" width="480" height="40"/>
+ </objectgroup>
+ <objectgroup color="#55007f" name="blackhole">
+  <object id="229" x="146" y="231" width="450" height="450">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ffff" name="magnet"/>
+ <objectgroup color="#ffff00" name="teleporter"/>
+ <objectgroup name="fan">
+  <object id="215" x="4" y="514" width="50" height="150">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="241" x="152" y="9" width="50" height="150">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="Boundary" opacity="0.9">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,1 1281,721 1,724 -1,0"/>
+  </object>
+  <object id="224" x="1284" y="0">
+   <polyline points="0,0 1276,2 1274,722 -6,718"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="laser">
+  <object id="247" x="985" y="185" width="337" height="10" rotation="90"/>
+  <object id="248" x="684" y="382" width="322" height="10" rotation="90"/>
+ </objectgroup>
+</map>

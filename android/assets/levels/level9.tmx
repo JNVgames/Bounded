@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="131">
+ <objectgroup color="#ff0101" name="ball" opacity="0.99">
+  <object id="47" x="40" y="79" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="130" x="372" y="500" width="80" height="20" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="109" x="88" y="36" width="120" height="40" rotation="90"/>
+  <object id="110" x="20" y="664" width="120" height="40"/>
+  <object id="111" x="208" y="706" width="120" height="40" rotation="270"/>
+  <object id="125" x="286" y="380" width="120" height="40"/>
+  <object id="126" x="280" y="38" width="120" height="40"/>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="key">
+  <object id="129" x="1171" y="202" width="30" height="60"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="wall">
+  <object id="102" x="323" y="132" width="204" height="10" rotation="90"/>
+  <object id="104" x="157" y="-2" width="606" height="10" rotation="90"/>
+  <object id="122" x="327" y="465" width="247" height="10" rotation="90"/>
+  <object id="128" x="333" y="463" width="606" height="10"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud"/>
+ <objectgroup color="#55007f" name="blackhole">
+  <object id="123" x="349" y="41" width="375" height="375">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ffff" name="magnet"/>
+ <objectgroup color="#ffff00" name="teleporter"/>
+ <objectgroup name="fan"/>
+ <objectgroup color="#ff0000" name="Boundary" opacity="0.9">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,1 1281,721 1,724 -1,0"/>
+  </object>
+  <object id="101" x="1279" y="3">
+   <polyline points="0,0 1279,-6 1276,706 3,709"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="laser"/>
+</map>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="76">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="47" x="30" y="27" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="50" x="1250" y="423" width="80" height="20" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow"/>
+ <objectgroup color="#ff5500" name="key"/>
+ <objectgroup color="#00ff00" name="wall">
+  <object id="54" x="639" y="3" width="500" height="10" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" name="gumcloud"/>
+ <objectgroup color="#55007f" name="blackhole"/>
+ <objectgroup color="#00ffff" name="magnet"/>
+ <objectgroup color="#ffff00" name="teleporter"/>
+ <objectgroup name="fan"/>
+ <objectgroup color="#ff0000" name="Boundary">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,0 1280,720 0,720 0,0"/>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="106">
+ <objectgroup color="#ff0101" name="ball">
+  <object id="47" x="50" y="47" width="50" height="50">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="portal">
+  <object id="50" x="1257" y="331" width="80" height="20" rotation="90"/>
+ </objectgroup>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="51" x="29" y="649" width="120" height="40" rotation="335">
+   <properties>
+    <property name="impulseScale" value="8"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="key">
+  <object id="52" x="995" y="153" width="30" height="60"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="wall"/>
+ <objectgroup color="#ff55ff" name="gumcloud"/>
+ <objectgroup color="#55007f" name="blackhole">
+  <object id="105" x="182" y="112" width="400" height="400">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ffff" name="magnet"/>
+ <objectgroup color="#ffff00" name="teleporter"/>
+ <objectgroup name="fan">
+  <object id="75" x="768" y="701" width="50" height="150" rotation="270">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+  <object id="104" x="931" y="23" width="50" height="150" rotation="90">
+   <properties>
+    <property name="range" value="300"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="Boundary" opacity="0.9">
+  <object id="17" x="1" y="-1">
+   <polyline points="0,0 1280,1 1281,721 1,724 -1,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="laser">
+  <object id="97" x="965" y="36" width="400" height="10" rotation="45"/>
+  <object id="103" x="1252" y="424" width="400" height="10" rotation="135"/>
+ </objectgroup>
+</map>
