@@ -2,9 +2,8 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.handlers.level;
+package com.jnv.bounded.levelmechanics;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -146,7 +145,7 @@ public class LevelEventsHandler {
         }
     }
     public void levelCompleteUpdate() {
-        if(levelComplete != null) {
+        if (levelComplete != null) {
             levelComplete.handleInput();
         }
     }
@@ -202,7 +201,6 @@ public class LevelEventsHandler {
                 for (Body tp2 : cl.getAllTeleporters()) {
                     if (tp.getBody() == tp2) {
                         getTargetTeleporter(tp.getTargetTeleporter(), ball);
-                        spawnBall();
                         break;
                     }
                 }
@@ -283,7 +281,7 @@ public class LevelEventsHandler {
     private void getTargetTeleporter(int target, Ball ball) {
         for (Teleporter tp : allTeleporters) {
             if (target == tp.getTPNum()) {
-                tp.update(ball);
+                tp.update(ball, cl.getTmpVelocity());
                 break;
             }
         }
@@ -294,8 +292,7 @@ public class LevelEventsHandler {
 
     // Setters
     public void unlockLevel() {
-        Bounded.lockedLevels.set(LevelState.level, false);
-        Gdx.app.log("LevelEventsHandler", "level = " + LevelState.level);
+        Bounded.lockedLevels.set(LevelState.getLevel(), false);
     }
 
     public void registerArrow(Arrow arrow) { allArrows.add(arrow); }
@@ -311,9 +308,6 @@ public class LevelEventsHandler {
     public void registerWall(Wall wall) { allWalls.add(wall); }
     public void registerLaser(Laser laser) { allLasers.add(laser); }
 
-    private void spawnBall() {
-        ball.setMode(Ball.Mode.SPAWN);
-    }
     public void resetBall() {
         destroyedPosition = new Vector2(ball.getBody().getPosition());
         ball.setMode(Ball.Mode.RESET);

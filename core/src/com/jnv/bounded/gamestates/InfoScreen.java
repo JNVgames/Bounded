@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.input.GestureDetector;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.handlers.screentouch.BoundedGestureProcessor;
-import com.jnv.bounded.handlers.screentouch.BoundedInput;
-import com.jnv.bounded.handlers.screentouch.BoundedInputProcessor;
+import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
+import com.jnv.bounded.inputprocessors.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.utilities.SimpleButton;
 

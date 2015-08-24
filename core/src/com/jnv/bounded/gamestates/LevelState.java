@@ -17,15 +17,17 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jnv.bounded.handlers.ButtonManager;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.handlers.level.BoundedContactListener;
-import com.jnv.bounded.handlers.level.LevelEventsHandler;
-import com.jnv.bounded.handlers.level.TiledMapLoader;
-import com.jnv.bounded.handlers.level.ToolbarUI;
-import com.jnv.bounded.handlers.level.WallsHistoryManager;
-import com.jnv.bounded.handlers.screentouch.BoundedGestureProcessor;
-import com.jnv.bounded.handlers.screentouch.BoundedInput;
-import com.jnv.bounded.handlers.screentouch.BoundedInputProcessor;
+import com.jnv.bounded.levelmechanics.BoundedContactListener;
+import com.jnv.bounded.levelmechanics.LevelEventsHandler;
+import com.jnv.bounded.levelmechanics.Panning;
+import com.jnv.bounded.levelmechanics.TiledMapLoader;
+import com.jnv.bounded.levelmechanics.ToolbarUI;
+import com.jnv.bounded.levelmechanics.WallsHistoryManager;
+import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
+import com.jnv.bounded.inputprocessors.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.utilities.LevelDistances;
 
 import java.text.DecimalFormat;
 
@@ -46,11 +48,11 @@ public class LevelState extends GameState {
     private EditState editState = EditState.DRAW, cache = EditState.DRAW;
     public boolean isReset = false;
     private ToolbarUI toolbar;
+    private Panning panning;
     private ButtonManager buttonManager;
-    private boolean panning = false;
     private float time = 0;
-    public static int level;
-    public static float maxDistance;
+    private static int level;
+    private static float maxDistance;
 
     public enum EditState {
         DRAW,
@@ -69,22 +71,17 @@ public class LevelState extends GameState {
     }
 
     public void update(float dt) {
-        leh.levelCompleteUpdate();
-
         if (canPlay(dt)) {
             handleInput();
             stepWorld(dt);
-
-            // Update distance info
             whm.update();
         }
-
-        // Collision checks
+        // Obstacle ollision checks
         leh.update(dt);
     }
     public void handleInput() {
         toolbar.handleInput();
-        handlePanning();
+        panning.handleInput();
     }
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -112,6 +109,7 @@ public class LevelState extends GameState {
 
         buttonManager = new ButtonManager(game);
         toolbar = new ToolbarUI(this);
+        panning = new Panning(this);
     }
     private void loadInputProcessors() {
         BoundedInputProcessor ip = new BoundedInputProcessor();
@@ -197,88 +195,28 @@ public class LevelState extends GameState {
         buttonManager.getButtons().get(ButtonManager.RETURN_KEY).draw(sb);
     }
 
-    // Panning
-    private void handlePanning() {
-        if (Gdx.input.isTouched(1) && !panning) {
-            panning = true;
-            BoundedInput.initX = cam.position.x;
-            BoundedInput.initY = cam.position.y;
-        }
-
-        if (BoundedInput.isReleased()) {
-            panning = false;
-        }
-
-        if (BoundedInput.isPanned) {
-            handleNormalPanning();
-            handleBorderPanning();
-            BoundedInput.isPanned = false;
-        }
-
-        if (BoundedInput.zoomed) {
-            if (BoundedInput.zoom <= 1 && BoundedInput.zoom >= .4f) {
-                cam.zoom = BoundedInput.zoom;
-            }
-            else if (BoundedInput.zoom >= 1) BoundedInput.zoom = 1;
-            else if (BoundedInput.zoom <= .4f) BoundedInput.zoom = .4f;
-            cam.zoom = BoundedInput.zoom;
-        }
-    }
-    private void handleNormalPanning() {
-        if (((BoundedInput.initX - scale(BoundedInput.deltaX2)) < scale(tml.getLevelWidth())) &&
-                (BoundedInput.initX - scale(BoundedInput.deltaX2) > 0) &&
-                (BoundedInput.initY + scale(BoundedInput.deltaY2) > 0) &&
-                (BoundedInput.initY + scale(BoundedInput.deltaY2)) < scale(tml.getLevelHeight())) {
-            cam.position.set(BoundedInput.initX - scale(BoundedInput.deltaX2),
-                    BoundedInput.initY + scale(BoundedInput.deltaY2), 0);
-        }
-    }
-    private void handleBorderPanning() {
-        if (((BoundedInput.initX - scale(BoundedInput.deltaX2)) < scale(tml.getLevelWidth())) &&
-                (BoundedInput.initX - scale(BoundedInput.deltaX2) > 0) &&
-                (!(BoundedInput.initY + scale(BoundedInput.deltaY2) > 0) ||
-                        !((BoundedInput.initY + scale(BoundedInput.deltaY2)) < scale(tml.getLevelHeight())))) {
-
-            if(!(BoundedInput.initY + scale(BoundedInput.deltaY2) > 0)) {
-                cam.position.set(BoundedInput.initX - scale(BoundedInput.deltaX2),
-                        0, 0);
-            } else {
-                cam.position.set(BoundedInput.initX - scale(BoundedInput.deltaX2),
-                        scale(tml.getLevelHeight()), 0);
-            }
-        }
-        if ((!((BoundedInput.initX - scale(BoundedInput.deltaX2)) < scale(tml.getLevelWidth())) ||
-                !(BoundedInput.initX - scale(BoundedInput.deltaX2) > 0)) &&
-                (BoundedInput.initY + scale(BoundedInput.deltaY2) > 0) &&
-                (BoundedInput.initY + scale(BoundedInput.deltaY2)) < scale(tml.getLevelHeight())) {
-
-            if (!((BoundedInput.initX - scale(BoundedInput.deltaX2)) < scale(tml.getLevelWidth()))) {
-                cam.position.set(scale(tml.getLevelWidth()),
-                        BoundedInput.initY + scale(BoundedInput.deltaY2), 0);
-            } else {
-                cam.position.set(0,
-                        BoundedInput.initY + scale(BoundedInput.deltaY2), 0);
-            }
-        }
-    }
-
     // Getters
     public LevelEventsHandler getLevelEventsHandler() { return leh; }
     public WallsHistoryManager getWallsHistoryManager() { return whm; }
     public GameStateManager getGameStateManager() { return gsm; }
     public BoundedContactListener getBoundedContactListener() { return cl; }
+    public TiledMapLoader getTml() { return tml; }
     public ButtonManager getButtonManager() { return buttonManager; }
     public World getWorld() { return world; }
     public boolean canPlay(float dt) {
         if (!leh.isLevelCompleted()) {
             time += dt;
-            return time >= 1.5f;
+            return time >= 0.3f;
         } else {
             return false;
         }
     }
     public EditState getEditState() { return editState; }
     public EditState getCacheState() { return cache; }
+    public static int getLevel() {
+        return level;
+    }
+    public static float getMaxDistance() { return maxDistance; }
 
     // Setters
     public void resetBall() {
@@ -302,5 +240,14 @@ public class LevelState extends GameState {
         } else if (level > 32 && level <= 40) {
             background = new TextureRegion(game.res.getTexture("purple background"));
         }
+    }
+    public static void setNextLevel() {
+        level++;
+    }
+    public static void setLevel(int lv) {
+        level = lv;
+    }
+    public static void setMaxDistance() {
+        maxDistance = LevelDistances.getDistance(level);
     }
 }

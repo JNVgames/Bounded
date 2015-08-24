@@ -52,17 +52,20 @@ public class Teleporter extends Obstacle {
         teleporter.dispose();
     }
 
-    public void update(Ball ball) {
+    public void update(Ball ball, Vector2 velocity) {
+        System.out.println(velocity);
         if (ball.getBody() != null) {
-            float ballSpeed = ball.getBody().getLinearVelocity().len() * 1.7f;
+            float ballSpeed = velocity.len();
+            float ballAngularVelocity = ball.getBody().getAngularVelocity();
 
             ball.getBody().setTransform(center.x + TELEPORTER_DISTANCE *
                             (float) Math.cos(Math.toRadians(angle)) / PPM,
                     center.y + TELEPORTER_DISTANCE *
-                            (float) Math.sin(Math.toRadians(angle)) / PPM, angle);
+                            (float) Math.sin(Math.toRadians(angle)) / PPM, 0);
 
             ball.getBody().setLinearVelocity(ballSpeed * (float) Math.cos(Math.toRadians(angle)),
                     ballSpeed * (float) Math.sin(Math.toRadians(angle)));
+            ball.getBody().setAngularVelocity(ballAngularVelocity);
 
             ball.setMode(Ball.Mode.SPAWN);
         }

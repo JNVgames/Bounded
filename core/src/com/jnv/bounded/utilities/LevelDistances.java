@@ -53,7 +53,7 @@ public class LevelDistances {
         distances.add(20f); // Level 39
         distances.add(25f); // Level 40
     }
-    public static float getDistance(int index) {
-        return distances.get(index);
+    public static float getDistance(int level) {
+        return distances.get(level - 1);
     }
 }

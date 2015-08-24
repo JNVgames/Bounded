@@ -17,6 +17,11 @@ public class BoundedAssetManager extends AssetManager {
         resourceNames = new ObjectMap<String, String>();
     }
 
+    public synchronized void clear() {
+        super.clear();
+        resourceNames.clear();
+    }
+
     public synchronized void unloadTexture(String name) {
         super.unload(resourceNames.get(name));
     }

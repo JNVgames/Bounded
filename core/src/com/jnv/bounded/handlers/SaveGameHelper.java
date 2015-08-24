@@ -23,7 +23,7 @@ public class SaveGameHelper {
     public static void saveLockedLevels() {
         JsonLevels jsonLevels = new JsonLevels();
         jsonLevels.levelsLocked = Bounded.lockedLevels;
-        jsonLevels.level = LevelState.level;
+        jsonLevels.level = LevelState.getLevel();
 
         Json json = new Json();
         writeFile("game.sav", json.toJson(jsonLevels));
@@ -36,7 +36,7 @@ public class SaveGameHelper {
             JsonLevels jsonLevels = json.fromJson(JsonLevels.class, save);
 
             Bounded.lockedLevels = jsonLevels.levelsLocked;
-            LevelState.level = jsonLevels.level;
+            LevelState.setLevel(jsonLevels.level);
 
             return Bounded.lockedLevels;
         } else {
@@ -51,7 +51,7 @@ public class SaveGameHelper {
             }
 
             Bounded.lockedLevels = levelsList;
-            LevelState.level = 1;
+            LevelState.setLevel(1);
 
             return Bounded.lockedLevels;
 

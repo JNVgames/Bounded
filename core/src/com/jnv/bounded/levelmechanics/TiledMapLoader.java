@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.handlers.level;
+package com.jnv.bounded.levelmechanics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -54,9 +54,9 @@ public class TiledMapLoader {
     public TiledMapLoader(LevelState levelState) {
         // Load Tiled Map
         try {
-            tiledMap = new TmxMapLoader().load("levels/level" + LevelState.level + ".tmx");
+            tiledMap = new TmxMapLoader().load("levels/level" + LevelState.getLevel() + ".tmx");
         } catch(Exception e) {
-            System.out.println("Cannot find file: levels/level" + LevelState.level + ".tmx");
+            System.out.println("Cannot find file: levels/level" + LevelState.getLevel() + ".tmx");
             Gdx.app.exit();
         }
         TiledMapWidth = tiledMap.getProperties().get("width", Integer.class);

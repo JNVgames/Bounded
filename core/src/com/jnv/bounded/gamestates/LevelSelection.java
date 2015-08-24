@@ -10,11 +10,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.input.GestureDetector;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.handlers.screentouch.BoundedGestureProcessor;
-import com.jnv.bounded.handlers.screentouch.BoundedInput;
-import com.jnv.bounded.handlers.screentouch.BoundedInputProcessor;
+import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
+import com.jnv.bounded.inputprocessors.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
 import com.jnv.bounded.main.Bounded;
-import com.jnv.bounded.utilities.LevelDistances;
 import com.jnv.bounded.utilities.SimpleButton;
 
 import java.util.ArrayList;
@@ -62,8 +61,8 @@ public class LevelSelection extends GameState {
             for (int i = 0; i < 8; i++) {
                 if (unlockedButtonsArray.get(i).checkIfClicked(BoundedInput.x, BoundedInput.y)) {
                     if (!Bounded.lockedLevels.get(i + getScreenNum() * 8)) {
-                        LevelState.level = i + 1 + getScreenNum() * 8;
-                        LevelState.maxDistance = LevelDistances.getDistance(i + getScreenNum() * 8);
+                        LevelState.setLevel(i + 1 + getScreenNum() * 8);
+                        LevelState.setMaxDistance();
                         gsm.setState(GameStateManager.State.LEVELSTATE);
                     }
                 }

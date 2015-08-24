@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.handlers.SaveGameHelper;
-import com.jnv.bounded.handlers.screentouch.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInput;
 import com.jnv.bounded.resources.BoundedAssetManager;
 import com.jnv.bounded.utilities.LevelDistances;
 import com.jnv.bounded.utilities.TextureLoader;
@@ -52,12 +52,12 @@ public class Bounded extends Game {
         resume();
 	}
 	public void render() {
-		camera.update();
-		sb.setProjectionMatrix(camera.combined);
-		gsm.update(Gdx.graphics.getDeltaTime());
-		gsm.render();
-		BoundedInput.update();
-	}
+        camera.update();
+        sb.setProjectionMatrix(camera.combined);
+        gsm.update(Gdx.graphics.getDeltaTime());
+        gsm.render();
+        BoundedInput.update();
+    }
 	public void dispose() {
         System.out.println("dispose()");
 		SaveGameHelper.saveLockedLevels();

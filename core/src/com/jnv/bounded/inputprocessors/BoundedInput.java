@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.handlers.screentouch;
+package com.jnv.bounded.inputprocessors;
 
 public class BoundedInput {
 

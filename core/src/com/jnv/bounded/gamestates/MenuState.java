@@ -13,8 +13,8 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.handlers.screentouch.BoundedInput;
-import com.jnv.bounded.handlers.screentouch.BoundedInputProcessor;
+import com.jnv.bounded.inputprocessors.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
 import com.jnv.bounded.main.Bounded;
 
 public class MenuState extends GameState {

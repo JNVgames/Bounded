@@ -2,8 +2,9 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.handlers.level;
+package com.jnv.bounded.levelmechanics;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -29,6 +30,9 @@ public class BoundedContactListener implements ContactListener{
     private List<Body> allMagnets;
     private List<Body> allTeleporters;
     private Body body = null;
+
+    // Vector2 variable for velocity of the ball before it touches the teleporter
+    private Vector2 tmpVelocity;
 
     public BoundedContactListener() {
         allArrows = new ArrayList<Body>();
@@ -120,15 +124,6 @@ public class BoundedContactListener implements ContactListener{
             } else if (fb.getUserData() != null && fb.getUserData().equals("portal")) {
                 numPortalContacts++;
                 body = fb.getBody();
-                ball = fa.getBody();
-            }
-
-            // Teleporter
-            if (fa.getUserData() != null && fa.getUserData().equals("teleporter")) {
-                allTeleporters.add(fa.getBody());
-                ball = fb.getBody();
-            } else if (fb.getUserData() != null && fb.getUserData().equals("teleporter")) {
-                allTeleporters.add(fb.getBody());
                 ball = fa.getBody();
             }
 
@@ -225,7 +220,21 @@ public class BoundedContactListener implements ContactListener{
 
     }
 
-    public void preSolve(Contact contact, Manifold oldManifold) {}
+    public void preSolve(Contact contact, Manifold oldManifold) {
+        Fixture fa = contact.getFixtureA();
+        Fixture fb = contact.getFixtureB();
+
+        if (fa == null || fb == null) { return; }
+
+        // Teleporter
+        if (fa.getUserData() != null && fa.getUserData().equals("teleporter")) {
+            allTeleporters.add(fa.getBody());
+            tmpVelocity = fb.getBody().getLinearVelocity();
+        } else if (fb.getUserData() != null && fb.getUserData().equals("teleporter")) {
+            allTeleporters.add(fb.getBody());
+            tmpVelocity = fa.getBody().getLinearVelocity();
+        }
+    }
     public void postSolve(Contact contact, ContactImpulse impulse) {}
 
     // Getters
@@ -247,6 +256,12 @@ public class BoundedContactListener implements ContactListener{
     public List<Body> getAllTeleporters() { return allTeleporters; }
     public Body getBody() { return body; }
     public Body getBall() { return ball; }
+
+    public Vector2 getTmpVelocity() {
+        Vector2 tmp = tmpVelocity;
+        tmpVelocity = null;
+        return tmp;
+    }
 
     // Setters
     public void resetContacts() {

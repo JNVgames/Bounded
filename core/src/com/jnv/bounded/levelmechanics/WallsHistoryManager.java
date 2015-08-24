@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.handlers.level;
+package com.jnv.bounded.levelmechanics;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jnv.bounded.entities.UserWall;
 import com.jnv.bounded.gamestates.LevelState;
-import com.jnv.bounded.handlers.screentouch.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInput;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.utilities.Constants;
 
@@ -50,7 +50,7 @@ public class WallsHistoryManager {
     public WallsHistoryManager(LevelState levelState) {
         this.levelState = levelState;
         this.world = levelState.getWorld();
-        this.maxDistance = LevelState.maxDistance;
+        this.maxDistance = LevelState.getMaxDistance();
 
         wallEntries = new Stack<WallEntry>();
         redoEntries = new Stack<WallEntry>();

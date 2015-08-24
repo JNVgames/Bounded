@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.handlers.level;
+package com.jnv.bounded.levelmechanics;
 
 import com.jnv.bounded.entities.UserWall;
 

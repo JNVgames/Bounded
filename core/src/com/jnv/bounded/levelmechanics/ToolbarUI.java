@@ -2,14 +2,14 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.handlers.level;
+package com.jnv.bounded.levelmechanics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jnv.bounded.gamestates.LevelState;
 import com.jnv.bounded.handlers.ButtonManager;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.handlers.screentouch.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInput;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.utilities.Constants;
 
@@ -57,8 +57,7 @@ public class ToolbarUI {
                         break;
 
                     default:
-                        Gdx.app.log("Editing states", "this shouldn't happen");
-                        break; // for debugging. ^should never occur
+                        break;
                 }
             }
         }
