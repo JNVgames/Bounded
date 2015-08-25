@@ -67,7 +67,7 @@ public class SaveGameHelper {
         FileHandle file = Gdx.files.local(filename);
         if(file != null && file.exists()) {
             String s = file.readString();
-            if(!s.isEmpty()) {
+            if(s != null) {
                 return com.badlogic.gdx.utils.Base64Coder.decodeString(s);
             }
         }

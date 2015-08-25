@@ -15,7 +15,7 @@ import com.jnv.bounded.inputprocessors.BoundedInput;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.utilities.SimpleButton;
 
-public class LevelComplete {
+class LevelComplete {
 
     private BitmapFont completedLevelFont;
     private CharSequence completedLevelString = "You have completed this level!";

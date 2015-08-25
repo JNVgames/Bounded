@@ -45,10 +45,8 @@ public class ButtonManager {
     private SimpleButton grayUndoButton, grayRedoButton, grayClearButton;
 
     //Values for toolbar
-    final float TOOLBAR_BUTTON_SIZE = Bounded.WIDTH / 12;
-    final float TOOLBAR_BUTTON_PADDING = TOOLBAR_BUTTON_SIZE * (12 - 9) / 9;
-    final float TOOLBAR_SIZE_X = Bounded.WIDTH;
-    final float TOOLBAR_SIZE_Y = TOOLBAR_BUTTON_SIZE; //Toolbar Y size is toolbar button size
+    private final float TOOLBAR_BUTTON_SIZE = Bounded.WIDTH / 12;
+    private final float TOOLBAR_BUTTON_PADDING = TOOLBAR_BUTTON_SIZE * (12 - 9) / 9;
 
     public ButtonManager(Bounded bounded) {
         createButtons(bounded);

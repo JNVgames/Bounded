@@ -12,11 +12,11 @@ import com.jnv.bounded.main.Bounded;
 
 public abstract class GameState {
 
-    protected GameStateManager gsm;
     protected Bounded game;
-    protected SpriteBatch sb;
     protected OrthographicCamera cam;
-    protected StretchViewport stretchViewport;
+    GameStateManager gsm;
+    SpriteBatch sb;
+    StretchViewport stretchViewport;
 
     protected GameState(GameStateManager gsm) {
         this.gsm = gsm;

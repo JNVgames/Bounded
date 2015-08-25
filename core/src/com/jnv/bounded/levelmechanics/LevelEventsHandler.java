@@ -112,7 +112,7 @@ public class LevelEventsHandler {
         }
     }
 
-    public void arrowUpdate() {
+    private void arrowUpdate() {
         if (cl.isTouchingArrow()) {
             for (Arrow arrow : allArrows) {
                 for (Body body : cl.getAllArrows()) {
@@ -123,7 +123,7 @@ public class LevelEventsHandler {
             }
         }
     }
-    public void blackHoleUpdate(float dt) {
+    private void blackHoleUpdate(float dt) {
         // For keeping track of time passed for animation
         for (BlackHole blackHole : allBlackHoles) {
             blackHole.update(dt);
@@ -144,12 +144,12 @@ public class LevelEventsHandler {
             levelState.resetBall();
         }
     }
-    public void levelCompleteUpdate() {
+    private void levelCompleteUpdate() {
         if (levelComplete != null) {
             levelComplete.handleInput();
         }
     }
-    public void fanUpdate(float dt) {
+    private void fanUpdate(float dt) {
         for (Fan fan : allFans) {
             fan.update(dt);
         }
@@ -165,18 +165,18 @@ public class LevelEventsHandler {
             }
         }
     }
-    public void gumCloudUpdate() {
+    private void gumCloudUpdate() {
         if (cl.isTouchingGumCloud()) {
             ball.getBody().setLinearDamping(2f);
         } else { ball.getBody().setLinearDamping(0f); }
     }
-    public void keyUpdate() {
+    private void keyUpdate() {
         if (cl.isTouchingKey()) {
             key.update(true);
             whm.removeBody(key.getBody());
         }
     }
-    public void magnetUpdate(float dt) {
+    private void magnetUpdate(float dt) {
         for (Magnet magnet : allMagnets) {
             magnet.update(dt);
         }
@@ -192,10 +192,10 @@ public class LevelEventsHandler {
             }
         }
     }
-    public void portalUpdate(float dt) {
+    private void portalUpdate(float dt) {
         portal.update(dt);
     }
-    public void teleporterUpdate() {
+    private void teleporterUpdate() {
         if (cl.isTouchingTeleporter()) {
             for (Teleporter tp : allTeleporters) {
                 for (Body tp2 : cl.getAllTeleporters()) {
@@ -207,41 +207,41 @@ public class LevelEventsHandler {
             }
         }
     }
-    public void laserUpdate() {
+    private void laserUpdate() {
         if (cl.isTouchingLaser()) {
             levelState.resetBall();
         }
     }
 
-    public void arrowRender(SpriteBatch sb) {
+    private void arrowRender(SpriteBatch sb) {
         for (Arrow arrow : allArrows) {
             arrow.render(sb);
         }
     }
-    public void ballRender(SpriteBatch sb) {
+    private void ballRender(SpriteBatch sb) {
         if (cl.isTouchingPortal() && (key == null || key.isCollected()) || levelCompleted) {
             levelCompletionEvents(sb);
         } else {
             ball.render(sb);
         }
     }
-    public void blackHoleRender(SpriteBatch sb) {
+    private void blackHoleRender(SpriteBatch sb) {
         for (BlackHole blackHole : allBlackHoles) {
             blackHole.render(sb);
         }
     }
-    public void boundariesRender(SpriteBatch sb) { boundaries.render(sb); }
-    public void fanRender(SpriteBatch sb) {
+    private void boundariesRender(SpriteBatch sb) { boundaries.render(sb); }
+    private void fanRender(SpriteBatch sb) {
         for (Fan fan : allFans) {
             fan.render(sb);
         }
     }
-    public void gumCloudRender(SpriteBatch sb) {
+    private void gumCloudRender(SpriteBatch sb) {
         for (GumCloud gumCloud : allGumClouds) {
             gumCloud.render(sb);
         }
     }
-    public void keyRender(SpriteBatch sb) {
+    private void keyRender(SpriteBatch sb) {
         if (key != null) { key.render(sb); }
     }
     public void levelCompleteRender(SpriteBatch sb) {
@@ -249,25 +249,25 @@ public class LevelEventsHandler {
             levelComplete.render(sb);
         }
     }
-    public void magnetRender(SpriteBatch sb) {
+    private void magnetRender(SpriteBatch sb) {
         for (Magnet magnet : allMagnets) {
             magnet.render(sb);
         }
     }
-    public void portalRender(SpriteBatch sb) {
+    private void portalRender(SpriteBatch sb) {
         portal.render(sb);
     }
-    public void teleporterRender(SpriteBatch sb) {
+    private void teleporterRender(SpriteBatch sb) {
         for (Teleporter teleporters : allTeleporters) {
             teleporters.render(sb);
         }
     }
-    public void wallRender(SpriteBatch sb) {
+    private void wallRender(SpriteBatch sb) {
         for (Wall wall : allWalls) {
             wall.render(sb);
         }
     }
-    public void laserRender(SpriteBatch sb) {
+    private void laserRender(SpriteBatch sb) {
         for (Laser laser : allLasers) {
             laser.render(sb);
         }

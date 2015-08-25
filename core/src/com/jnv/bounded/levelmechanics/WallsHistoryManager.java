@@ -42,11 +42,6 @@ public class WallsHistoryManager {
     private WallEntry eraseEntry;
     private Body hitBody = null;
 
-    // Static vars
-    private static List<UserWall> allWalls_dupe;
-    private static Stack<WallEntry> wallEntries_dupe;
-    private static Stack<WallEntry> redoEntries_dupe;
-
     public WallsHistoryManager(LevelState levelState) {
         this.levelState = levelState;
         this.world = levelState.getWorld();

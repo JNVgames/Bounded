@@ -18,8 +18,8 @@ public class GameStateManager {
 
     private Bounded game;
     private Stack<GameState> gameStates;
+    private static GameState pauseState;
     public State currentState;
-    public static GameState pauseState;
 
     public enum State {
         SPLASH, MENU, LEVELSELECTION, LEVELSTATE, FIRSTINFOPAGE
@@ -48,7 +48,7 @@ public class GameStateManager {
     public void pushState(State state) {
         gameStates.push(getState(state));
     }
-    public void popState() {
+    private void popState() {
         GameState g = gameStates.pop();
         g.dispose();
     }

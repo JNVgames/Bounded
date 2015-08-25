@@ -10,11 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class BoundedGestureProcessor implements GestureDetector.GestureListener {
 
-    float initialScale = 1;
-    float flingVelocityX, flingVelocityY;
+    private float flingVelocityX, flingVelocityY;
 
     public boolean touchDown(float x, float y, int pointer, int button) {
-        initialScale = BoundedInput.zoom;
         return false;
     }
     public boolean tap(float x, float y, int count, int button) {
@@ -109,9 +107,6 @@ public class BoundedGestureProcessor implements GestureDetector.GestureListener 
     }
 
     // Getters
-    public float getFlingVelocityX() {
-        return flingVelocityX;
-    }
     public float getFlingVelocityY() {
         return flingVelocityY;
     }

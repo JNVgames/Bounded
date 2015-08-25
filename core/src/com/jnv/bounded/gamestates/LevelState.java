@@ -17,15 +17,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jnv.bounded.handlers.ButtonManager;
 import com.jnv.bounded.handlers.GameStateManager;
+import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
+import com.jnv.bounded.inputprocessors.BoundedInput;
+import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
 import com.jnv.bounded.levelmechanics.BoundedContactListener;
 import com.jnv.bounded.levelmechanics.LevelEventsHandler;
 import com.jnv.bounded.levelmechanics.Panning;
 import com.jnv.bounded.levelmechanics.TiledMapLoader;
 import com.jnv.bounded.levelmechanics.ToolbarUI;
 import com.jnv.bounded.levelmechanics.WallsHistoryManager;
-import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
-import com.jnv.bounded.inputprocessors.BoundedInput;
-import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.utilities.LevelDistances;
 
@@ -46,7 +46,7 @@ public class LevelState extends GameState {
     private LevelEventsHandler leh;
     private TiledMapLoader tml;
     private EditState editState = EditState.DRAW, cache = EditState.DRAW;
-    public boolean isReset = false;
+    private boolean isReset = false;
     private ToolbarUI toolbar;
     private Panning panning;
     private ButtonManager buttonManager;
@@ -76,7 +76,7 @@ public class LevelState extends GameState {
             stepWorld(dt);
             whm.update();
         }
-        // Obstacle ollision checks
+        // Obstacle collision checks
         leh.update(dt);
     }
     public void handleInput() {
@@ -203,7 +203,7 @@ public class LevelState extends GameState {
     public TiledMapLoader getTml() { return tml; }
     public ButtonManager getButtonManager() { return buttonManager; }
     public World getWorld() { return world; }
-    public boolean canPlay(float dt) {
+    private boolean canPlay(float dt) {
         if (!leh.isLevelCompleted()) {
             time += dt;
             return time >= 0.3f;
