@@ -39,7 +39,6 @@ public class Bounded extends Game {
 	public static int HEIGHT = 720;
 
     private static boolean gamePaused = false;
-    private static GameStateManager.State state;
 
     private static FreeTypeFontGenerator generator;
 
@@ -68,7 +67,6 @@ public class Bounded extends Game {
 	public void resume() {
         System.out.println("resume");
         if (gamePaused) {
-            gsm.setState(state);
             lockedLevels = SaveGameHelper.loadLockedLevels();
             gamePaused = false;
             gsm.resume();
@@ -77,7 +75,6 @@ public class Bounded extends Game {
 	public void pause() {
         System.out.println("pause");
         gamePaused = true;
-        state = gsm.currentState;
         SaveGameHelper.saveLockedLevels();
         gsm.pause();
     }
