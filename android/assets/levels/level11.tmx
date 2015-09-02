@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="112">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="113">
  <objectgroup color="#ff0101" name="ball">
   <object id="47" x="606" y="46" width="50" height="50">
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup color="#ff0000" name="portal">
-  <object id="50" x="1272" y="46" width="80" height="20" rotation="90"/>
+  <object id="50" x="1279" y="66" width="80" height="20" rotation="90"/>
  </objectgroup>
  <objectgroup color="#ffa0a4" name="arrow">
   <object id="51" x="663" y="181" width="120" height="40" rotation="90"/>
@@ -17,18 +17,14 @@
  </objectgroup>
  <objectgroup color="#00ff00" name="wall"/>
  <objectgroup color="#ff55ff" name="gumcloud">
-  <object id="107" x="994" y="160" width="206" height="68"/>
+  <object id="107" x="991" y="145" width="206" height="68"/>
+  <object id="112" x="990" y="4" width="206" height="68"/>
  </objectgroup>
  <objectgroup color="#55007f" name="blackhole"/>
  <objectgroup color="#00ffff" name="magnet"/>
  <objectgroup color="#ffff00" name="teleporter"/>
  <objectgroup name="fan">
   <object id="75" x="12" y="11" width="50" height="150">
-   <properties>
-    <property name="range" value="300"/>
-   </properties>
-  </object>
-  <object id="106" x="1223" y="199" width="50" height="150">
    <properties>
     <property name="range" value="300"/>
    </properties>
@@ -46,7 +42,7 @@
  </objectgroup>
  <objectgroup color="#0000ff" name="laser">
   <object id="97" x="495" y="5" width="300" height="10"/>
-  <object id="104" x="713" y="220" width="300" height="10"/>
+  <object id="104" x="713" y="220" width="563" height="10"/>
   <object id="105" x="253" y="216" width="300" height="10"/>
   <object id="109" x="488" y="402" width="300" height="10"/>
  </objectgroup>

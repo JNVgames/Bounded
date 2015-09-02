@@ -6,7 +6,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff0000" name="portal">
-  <object id="49" x="28" y="682" width="80" height="20"/>
+  <object id="49" x="38" y="570" width="80" height="20" rotation="90"/>
  </objectgroup>
  <objectgroup color="#ffa0a4" name="arrow">
   <object id="51" x="31" y="55" width="120" height="40">
@@ -43,7 +43,7 @@
   <object id="101" x="209" y="10" width="414" height="126"/>
   <object id="106" x="622" y="138" width="383" height="128"/>
   <object id="110" x="1009" y="275" width="267" height="126"/>
-  <object id="114" x="10" y="510" width="612" height="205"/>
+  <object id="114" x="10" y="507" width="612" height="205"/>
  </objectgroup>
  <objectgroup color="#55007f" name="blackhole"/>
  <objectgroup color="#00ffff" name="magnet"/>
