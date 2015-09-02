@@ -20,12 +20,12 @@ import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
 import com.jnv.bounded.inputprocessors.BoundedInput;
 import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
-import com.jnv.bounded.levelmechanics.BoundedContactListener;
-import com.jnv.bounded.levelmechanics.LevelEventsHandler;
-import com.jnv.bounded.levelmechanics.Panning;
-import com.jnv.bounded.levelmechanics.TiledMapLoader;
-import com.jnv.bounded.levelmechanics.ToolbarUI;
-import com.jnv.bounded.levelmechanics.WallsHistoryManager;
+import com.jnv.bounded.level.BoundedContactListener;
+import com.jnv.bounded.level.LevelEventsHandler;
+import com.jnv.bounded.level.Panning;
+import com.jnv.bounded.level.TiledMapLoader;
+import com.jnv.bounded.level.ToolbarUI;
+import com.jnv.bounded.level.WallsHistoryManager;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.utilities.LevelDistances;
 

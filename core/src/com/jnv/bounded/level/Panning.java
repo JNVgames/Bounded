@@ -1,4 +1,4 @@
-package com.jnv.bounded.levelmechanics;
+package com.jnv.bounded.level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;

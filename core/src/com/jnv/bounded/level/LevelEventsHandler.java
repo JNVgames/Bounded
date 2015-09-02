@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.levelmechanics;
+package com.jnv.bounded.level;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -44,7 +44,7 @@ public class LevelEventsHandler {
     private BoundedContactListener cl;
     private WallsHistoryManager whm;
 
-    private LevelComplete levelComplete;
+    private com.jnv.bounded.level.LevelComplete levelComplete;
 
     private static Vector2 destroyedPosition;
     private boolean levelCompleted = false;
@@ -108,7 +108,7 @@ public class LevelEventsHandler {
         }
         unlockLevel();
         if(levelComplete == null) {
-            levelComplete = new LevelComplete(levelState);
+            levelComplete = new com.jnv.bounded.level.LevelComplete(levelState);
         }
     }
 

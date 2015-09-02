@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.jnv.bounded.levelmechanics.LevelEventsHandler;
+import com.jnv.bounded.level.LevelEventsHandler;
 import com.jnv.bounded.main.Bounded;
 
 import static com.jnv.bounded.utilities.Constants.BALL_RADIUS;
