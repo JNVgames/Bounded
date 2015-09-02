@@ -14,26 +14,28 @@ import com.jnv.bounded.utilities.Constants;
 
 public class Obstacle {
 
-    protected Bounded bounded;
-    protected World world;
-    protected Body body;
-    protected BodyDef bodyDef;
-    protected TextureRegion objectTexture;
-    protected Vector2 center;
+	protected Bounded bounded;
+	protected World world;
+	protected Body body;
+	protected BodyDef bodyDef;
+	protected TextureRegion objectTexture;
+	protected Vector2 center;
 
-    protected Obstacle(String name, Vector2 center, World world, Bounded bounded) {
-        this.bounded = bounded;
-        this.world = world;
-        this.center = center.scl(1 / Constants.PPM);
-        objectTexture = new TextureRegion(bounded.res.getTexture(name));
+	protected Obstacle(String name, Vector2 center, World world, Bounded bounded) {
+		this.bounded = bounded;
+		this.world = world;
+		this.center = center.scl(1 / Constants.PPM);
+		objectTexture = new TextureRegion(bounded.res.getTexture(name));
 
-        bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.fixedRotation = true;
-        bodyDef.position.set(center);
-        body = world.createBody(bodyDef);
-    }
+		bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.StaticBody;
+		bodyDef.fixedRotation = true;
+		bodyDef.position.set(center);
+		body = world.createBody(bodyDef);
+	}
 
-    // Getters
-    public Body getBody() { return body; }
+	// Getters
+	public Body getBody() {
+		return body;
+	}
 }

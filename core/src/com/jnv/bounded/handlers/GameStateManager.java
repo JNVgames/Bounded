@@ -16,77 +16,87 @@ import java.util.Stack;
 
 public class GameStateManager {
 
-    private Bounded game;
-    private Stack<GameState> gameStates;
-    private static GameState pauseState;
-    public State currentState;
+	private static GameState pauseState;
+	public State currentState;
+	private Bounded game;
+	private Stack<GameState> gameStates;
 
-    public enum State {
-        SPLASH, MENU, LEVELSELECTION, LEVELSTATE, FIRSTINFOPAGE
-    }
+	public GameStateManager(Bounded game) {
+		this.game = game;
+		gameStates = new Stack<GameState>();
+	}
 
-    public GameStateManager(Bounded game) {
-        this.game = game;
-        gameStates = new Stack<GameState>();
-    }
+	public void update(float dt) {
+		gameStates.peek().update(dt);
+	}
 
-    public void update(float dt) {
-        gameStates.peek().update(dt);
-    }
-    public void render() {
-        gameStates.peek().render();
-    }
-    public void pause() {
-        pauseState = gameStates.peek();
-    }
-    public void resume() {
-        gameStates = new Stack<GameState>();
-        gameStates.push(pauseState);
-    }
+	public void render() {
+		gameStates.peek().render();
+	}
 
-    // Helpers
-    public void pushState(State state) {
-        gameStates.push(getState(state));
-    }
-    private void popState() {
-        GameState g = gameStates.pop();
-        g.dispose();
-    }
+	public void pause() {
+		pauseState = gameStates.peek();
+	}
 
-    // Getters
-    public GameState state() { return gameStates.peek(); }
-    private GameState getState(State state) {
-        currentState = state;
-        switch (state) {
-            case MENU:
-                return new MenuState(this);
+	public void resume() {
+		gameStates = new Stack<GameState>();
+		gameStates.push(pauseState);
+	}
 
-            case SPLASH:
-                return new SplashScreen(this);
+	// Helpers
+	public void pushState(State state) {
+		gameStates.push(getState(state));
+	}
 
-            case LEVELSELECTION:
-                return new LevelSelection(this);
+	private void popState() {
+		GameState g = gameStates.pop();
+		g.dispose();
+	}
 
-            case LEVELSTATE:
-                return new LevelState(this);
+	// Getters
+	public GameState state() {
+		return gameStates.peek();
+	}
 
-            case FIRSTINFOPAGE:
-                return new InfoScreen(this);
+	private GameState getState(State state) {
+		currentState = state;
+		switch (state) {
+			case MENU:
+				return new MenuState(this);
 
-            default:
-                Gdx.app.log("GameStateManager", "getState() returns null: ERROR");
-                return null;
-        }
-    }
-    public Bounded game() { return game; }
+			case SPLASH:
+				return new SplashScreen(this);
 
-    // Setters
-    public void setState(State state) {
-        if (gameStates.isEmpty()) pushState(state);
-        else {
-            popState();
-            pushState(state);
-        }
-    }
+			case LEVELSELECTION:
+				return new LevelSelection(this);
+
+			case LEVELSTATE:
+				return new LevelState(this);
+
+			case FIRSTINFOPAGE:
+				return new InfoScreen(this);
+
+			default:
+				Gdx.app.log("GameStateManager", "getState() returns null: ERROR");
+				return null;
+		}
+	}
+
+	public Bounded game() {
+		return game;
+	}
+
+	// Setters
+	public void setState(State state) {
+		if (gameStates.isEmpty()) pushState(state);
+		else {
+			popState();
+			pushState(state);
+		}
+	}
+
+	public enum State {
+		SPLASH, MENU, LEVELSELECTION, LEVELSTATE, FIRSTINFOPAGE
+	}
 
 }

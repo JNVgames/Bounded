@@ -9,204 +9,174 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
 import com.jnv.bounded.inputprocessors.BoundedInput;
-import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
+import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.main.Bounded;
-import com.jnv.bounded.utilities.SimpleButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LevelSelection extends GameState {
 
-    private List<SimpleButton> unlockedButtonsArray;
-    private List<SimpleButton> lockedButtonsArray;
+	private static final int PADDING = Bounded.WIDTH / 25;
+	private static final int BUTTON_HEIGHT = Bounded.HEIGHT / 5;
+	private static final int BUTTON_WIDTH = Bounded.WIDTH / 5;
+	public static int screenNum = 1, maxScreenNum = 5;
 
-    private static final int PADDING = Bounded.WIDTH / 25;
-    private static final int BUTTON_WIDTH = Bounded.WIDTH / 5;
-    private static final int BUTTON_HEIGHT = Bounded.HEIGHT / 5;
+	public LevelSelection(GameStateManager gsm) {
+		super(gsm);
 
-    private Texture levelSelectionImageTexture;
-    private Texture background;
+		InputMultiplexer im = new InputMultiplexer();
+		im.addProcessor(new GestureDetector(new BoundedGestureProcessor()));
+		im.addProcessor(stage);
+		Gdx.input.setInputProcessor(im);
 
-    private SimpleButton infoButton;
-    private SimpleButton nextButton;
-    private SimpleButton prevButton;
+		loadStage();
+	}
 
-    public static int screenNum = 1, maxScreenNum = 5;
+	public void update(float dt) {
+		handleInput();
+		stage.act(dt);
+	}
 
-    public LevelSelection(GameStateManager gsm) {
-        super(gsm);
+	public void handleInput() {
+		if (BoundedInput.leftFling) {
+			setNextScreen();
+		}
 
-        cam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
-        stretchViewport.setScreenSize(0, 0);
+		if (BoundedInput.rightFling) {
+			setPreviousScreen();
+		}
+	}
 
-        initializeButtonArrays();
-        levelSelectionImageTexture = game.res.getTexture("level select");
-        InputMultiplexer im = new InputMultiplexer();
-        im.addProcessor(new GestureDetector(new BoundedGestureProcessor()));
-        im.addProcessor(new BoundedInputProcessor());
-        Gdx.input.setInputProcessor(im);
-    }
+	public void render() {
+		Gdx.gl.glClearColor(0, 0, 0, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    public void update(float dt) {
-        handleInput();
-    }
-    public void handleInput() {
-        if(BoundedInput.isTapped) {
+		stage.draw();
+	}
 
-            //Gdx.app.log("LevelSelection", "viewport camera x = " + )
-            for (int i = 0; i < 8; i++) {
-                if (unlockedButtonsArray.get(i).checkIfClicked(BoundedInput.x, BoundedInput.y)) {
-                    if (!Bounded.lockedLevels.get(i + getScreenNum() * 8)) {
-                        LevelState.setLevel(i + 1 + getScreenNum() * 8);
-                        LevelState.setMaxDistance();
-                        gsm.setState(GameStateManager.State.LEVELSTATE);
-                    }
-                }
-            }
+	public void dispose() {
 
-            if (infoButton.checkIfClicked(BoundedInput.x, BoundedInput.y)) {
-                goToFirstInfoPage();
-            }
+	}
 
-            else if (prevButton.checkIfClicked(BoundedInput.x, BoundedInput.y)) {
-                setNextScreen();
-            }
+	// Helpers
+	private void loadStage() {
 
-            else if (nextButton.checkIfClicked(BoundedInput.x, BoundedInput.y)) {
-                setPreviousScreen();
-            }
+		createImage(game.res.getTexture("level select background"), 0, 0, Bounded.WIDTH, Bounded.HEIGHT, new Runnable() {
+			@Override
+			public void run() {
+			}
+		});
 
-        }
+		initButtons();
 
-        if(BoundedInput.leftFling) {
-            setNextScreen();
-        }
+		createImage(game.res.getTexture("info button"), 1160, 600, 100, 100, new Runnable() {
+			@Override
+			public void run() {
+				gsm.setState(GameStateManager.State.FIRSTINFOPAGE);
+			}
+		});
+		createImage(game.res.getTexture("left_arrow"), 50, 50, 100, 50, new Runnable() {
+			@Override
+			public void run() {
+				setPreviousScreen();
+			}
+		});
+		createImage(game.res.getTexture("right_arrow"), 1130, 50, 100, 50, new Runnable() {
+			@Override
+			public void run() {
+				setNextScreen();
+			}
+		});
+		Image levelSelectText = new Image(game.res.getTexture("level select"));
+		levelSelectText.layout();
+		levelSelectText.setBounds((Bounded.WIDTH - 612) / 2, Bounded.HEIGHT - 200, 612, 144);
+		stage.addActor(levelSelectText);
+	}
 
-        if(BoundedInput.rightFling) {
-            setPreviousScreen();
-        }
-    }
-    public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	private void initButtons() {
+		for (int i = 1; i <= 4; i++) {
+			final int index = i;
+			if (Bounded.isLevelUnlocked(i + getScreenNum() * 8)) {
+				createImage(game.res.getTexture("level" + (i + getScreenNum() * 8) + "_locked"),
+						(i) * PADDING + ((i - 1) * BUTTON_WIDTH), 2 * BUTTON_HEIGHT + 100,
+						BUTTON_WIDTH, BUTTON_HEIGHT, new Runnable() {
+							@Override
+							public void run() {
+							}
+						});
+			} else {
+				createImage(game.res.getTexture("level" + (i + getScreenNum() * 8) + "_button"),
+						(i) * PADDING + ((i - 1) * BUTTON_WIDTH), 2 * BUTTON_HEIGHT + 100,
+						BUTTON_WIDTH, BUTTON_HEIGHT, new Runnable() {
+							@Override
+							public void run() {
+								LevelState.setLevel(index + getScreenNum() * 8);
+								LevelState.setMaxDistance();
+								gsm.setState(GameStateManager.State.LEVELSTATE);
+							}
+						});
+			}
+		}
 
-        sb.setProjectionMatrix(cam.combined);
-        sb.begin();
-        sb.draw(background, 0, 0, 1280, 720);
-        sb.draw(levelSelectionImageTexture, (Bounded.WIDTH / 2) - 306, Bounded.HEIGHT - 200);
-        drawButtons();
-        sb.end();
-    }
-    public void dispose() {
+		for (int i = 5; i <= 8; i++) {
+			final int index = i;
+			if (Bounded.isLevelUnlocked(i + getScreenNum() * 8)) {
+				createImage(game.res.getTexture("level" + (i + getScreenNum() * 8) + "_locked"),
+						(i - 4) * PADDING + (i - 5) * BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH,
+						BUTTON_HEIGHT, new Runnable() {
+							@Override
+							public void run() {
+							}
+						});
+			} else {
+				createImage(game.res.getTexture("level" + (i + getScreenNum() * 8) + "_button"),
+						(i - 4) * PADDING + (i - 5) * BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH,
+						BUTTON_HEIGHT, new Runnable() {
+							@Override
+							public void run() {
+								LevelState.setLevel(index + getScreenNum() * 8);
+								LevelState.setMaxDistance();
+								gsm.setState(GameStateManager.State.LEVELSTATE);
+							}
+						});
+			}
+		}
+	}
 
-    }
+	// Getters
+	private int getScreenNum() {
+		return (screenNum - 1);
+	}
 
-    // Helpers
-    private void goToFirstInfoPage() { gsm.setState(GameStateManager.State.FIRSTINFOPAGE); }
-    private void initializeButtonArrays() {
+	// Setters
+	private void setNextScreen() {
+		if (screenNum != maxScreenNum) {
+			screenNum++;
+			gsm.setState(GameStateManager.State.LEVELSELECTION);
+		}
+	}
 
-        //Instantiate ArrayLists and add button names to the arraylists
-        //For locked and unlocked buttons
-        List<Texture> unlockedTexturesArray = new ArrayList<Texture>();
-        List<Texture> lockedTexturesArray = new ArrayList<Texture>();
+	private void setPreviousScreen() {
+		if (screenNum != 1) {
+			screenNum--;
+			gsm.setState(GameStateManager.State.LEVELSELECTION);
+		}
+	}
 
-        initTextureArrays(unlockedTexturesArray, lockedTexturesArray);
-        setButtons(unlockedTexturesArray, lockedTexturesArray);
-
-        Texture infoButtonTexture = game.res.getTexture("info button");
-        infoButton = new SimpleButton(infoButtonTexture, 1160, 600, 100, 100);
-
-        background = game.res.getTexture("level select background");
-
-        nextButton = new SimpleButton(game.res.getTexture("left_arrow"), 50, 50, 100, 50);
-        prevButton = new SimpleButton(game.res.getTexture("right_arrow"), 1130, 50, 100, 50);
-    }
-    private void initTextureArrays(List<Texture> unlockedTexturesArray,
-                                   List<Texture> lockedTexturesArray) {
-        unlockedButtonsArray = new ArrayList<SimpleButton>();
-        for (int i = 1; i <= 8; i++) {
-            unlockedTexturesArray.add(game.res.getTexture("level" + (i + getScreenNum() * 8)
-                    + "_button"));
-        }
-
-        lockedButtonsArray = new ArrayList<SimpleButton>();
-        for (int i = 1; i <= 8; i++) {
-            lockedTexturesArray.add(game.res.getTexture("level" + (i + getScreenNum() * 8)
-                    + "_locked"));
-        }
-    }
-    private void setButtons(List<Texture> unlockedTexturesArray,
-                            List<Texture> lockedTexturesArray) {
-        // Add locked and unlocked buttons and textures to the ArrayLists for levels 1-4
-        for(int i = 0; i < 4; i++) {
-            SimpleButton unlockedLevelButton = new SimpleButton(unlockedTexturesArray.get(i),
-                    (i + 1) * PADDING + (i * BUTTON_WIDTH),
-                    2 * BUTTON_HEIGHT + 100,
-                    BUTTON_WIDTH, BUTTON_HEIGHT);
-
-            SimpleButton lockedLevelButton = new SimpleButton(lockedTexturesArray.get(i),
-                    (i + 1) * PADDING + (i * BUTTON_WIDTH),
-                    2 * BUTTON_HEIGHT + 100,
-                    BUTTON_WIDTH, BUTTON_HEIGHT);
-
-            unlockedButtonsArray.add(i, unlockedLevelButton);
-            lockedButtonsArray.add(i, lockedLevelButton);
-        }
-
-        // Add locked and unlocked buttons and textures to the ArrayLists for levels 5-8
-        for(int i = 4; i < 8; i++) {
-            SimpleButton unlockedLevelButton = new SimpleButton(unlockedTexturesArray.get(i),
-                    (i - 3) * PADDING + (i - 4) * BUTTON_WIDTH,
-                    BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
-
-            SimpleButton lockedLevelButton = new SimpleButton(lockedTexturesArray.get(i),
-                    (i - 3) * PADDING + (i - 4) * BUTTON_WIDTH,
-                    BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
-
-            unlockedButtonsArray.add(i, unlockedLevelButton);
-            lockedButtonsArray.add(i, lockedLevelButton);
-        }
-    }
-    private void drawButtons() {
-
-        //Draw the red locked word over the middle of the buttons if the level is locked
-
-        for(int i = 0; i < 8; i++) {
-            if(Bounded.lockedLevels.get(i + getScreenNum() * 8)) {
-                lockedButtonsArray.get(i).draw(sb);
-            }
-
-            else {
-                unlockedButtonsArray.get(i).draw(sb);
-            }
-
-        }
-
-        infoButton.draw(sb);
-
-        //Draw arrows
-        nextButton.draw(sb);
-        prevButton.draw(sb);
-    }
-
-    // Getters
-    private int getScreenNum() { return (screenNum - 1); }
-
-    // Setters
-    private void setNextScreen() {
-        if (screenNum != maxScreenNum) {
-            screenNum++;
-            gsm.setState(GameStateManager.State.LEVELSELECTION);
-        }
-    }
-    private void setPreviousScreen() {
-        if (screenNum != 1) {
-            screenNum--;
-            gsm.setState(GameStateManager.State.LEVELSELECTION);
-        }
-    }
+	private Image createImage(Texture texture, float x, float y, float width, float height,
+							  final Runnable action) {
+		Image image = new Image(texture);
+		image.layout();
+		image.setBounds(x, y, width, height);
+		image.addListener(new InputListener(image) {
+			@Override
+			public void doAction() {
+				action.run();
+			}
+		});
+		stage.addActor(image);
+		return image;
+	}
 }

@@ -18,103 +18,105 @@ import static com.jnv.bounded.utilities.Constants.PPM;
 
 public class Portal extends Obstacle {
 
-    private float angle, spawnTime, destroyTime, dt;
-    private boolean isDrawn = true;
-    private Animation spawnAnimation, destroyAnimation;
+	private float angle, spawnTime, destroyTime, dt;
+	private boolean isDrawn = true;
+	private Animation spawnAnimation, destroyAnimation;
+	private Mode mode = Mode.SPAWN;
 
-    public enum Mode {
-        SPAWN,
-        NORMAL,
-        DESTROY,
-        EMPTY
-    }
+	public Portal(float xPos, float yPos, float angle, World world, Bounded bounded) {
+		super("portal", new Vector2(xPos, yPos), world, bounded);
 
-    private Mode mode = Mode.SPAWN;
+		this.angle = angle;
 
-    public Portal(float xPos, float yPos, float angle, World world, Bounded bounded) {
-        super("portal", new Vector2(xPos, yPos), world, bounded);
+		EdgeShape portal = new EdgeShape();
+		portal.set(
+				(float) (-PORTAL_WIDTH * Math.cos(Math.toRadians(angle)) / 2 / PPM),
+				(float) (-PORTAL_WIDTH * Math.sin(Math.toRadians(angle)) / 2 / PPM),
+				(float) (PORTAL_WIDTH * Math.cos(Math.toRadians(angle)) / 2 / PPM),
+				(float) (PORTAL_WIDTH * Math.sin(Math.toRadians(angle)) / 2 / PPM)
+		);
 
-        this.angle = angle;
+		FixtureDef fdef = new FixtureDef();
+		fdef.shape = portal;
+		fdef.isSensor = true;
+		body.createFixture(fdef).setUserData("portal");
 
-        EdgeShape portal = new EdgeShape();
-        portal.set(
-                (float) (-PORTAL_WIDTH * Math.cos(Math.toRadians(angle)) / 2 / PPM),
-                (float) (-PORTAL_WIDTH * Math.sin(Math.toRadians(angle)) / 2 / PPM),
-                (float) (PORTAL_WIDTH * Math.cos(Math.toRadians(angle)) / 2 / PPM),
-                (float) (PORTAL_WIDTH * Math.sin(Math.toRadians(angle)) / 2 / PPM)
-        );
+		portal.dispose();
 
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = portal;
-        fdef.isSensor = true;
-        body.createFixture(fdef).setUserData("portal");
+		spawnAnimation = new Animation(1 / 30f, bounded.textureLoader.getReversePortalFrames());
+		destroyAnimation = new Animation(1 / 30f, bounded.textureLoader.getPortalFrames());
+	}
 
-        portal.dispose();
+	public void update(float dt) {
+		this.dt = dt;
+	}
 
-        spawnAnimation = new Animation(1 / 30f, bounded.textureLoader.getReversePortalFrames());
-        destroyAnimation = new Animation(1 / 30f, bounded.textureLoader.getPortalFrames());
-    }
+	public void render(SpriteBatch sb) {
+		switch (mode) {
+			case SPAWN:
+				spawn(sb);
+				break;
+			case NORMAL:
+				renderPortal(sb);
+				break;
+			case DESTROY:
+				destroy(sb);
+				break;
+			default:
+				break;
+		}
+	}
 
-    public void update(float dt) {
-        this.dt = dt;
-    }
-    public void render(SpriteBatch sb) {
-        switch (mode) {
-            case SPAWN:
-                spawn(sb);
-                break;
-            case NORMAL:
-                renderPortal(sb);
-                break;
-            case DESTROY:
-                destroy(sb);
-                break;
-            default:
-                break;
-        }
-    }
+	// Helpers
+	private void spawn(SpriteBatch sb) {
+		spawnTime += dt;
+		sb.begin();
+		sb.draw(spawnAnimation.getKeyFrame(spawnTime), center.x - PORTAL_WIDTH / 2 / PPM,
+				center.y - PORTAL_HEIGHT / 2 / PPM, PORTAL_WIDTH / 2 / PPM, PORTAL_HEIGHT / 2 / PPM,
+				PORTAL_WIDTH / PPM, PORTAL_HEIGHT / PPM, 1, 1, angle);
+		sb.end();
 
-    // Helpers
-    private void spawn(SpriteBatch sb) {
-        spawnTime += dt;
-        sb.begin();
-        sb.draw(spawnAnimation.getKeyFrame(spawnTime), center.x - PORTAL_WIDTH / 2 / PPM,
-                center.y - PORTAL_HEIGHT / 2 / PPM, PORTAL_WIDTH / 2 / PPM, PORTAL_HEIGHT / 2 / PPM,
-                PORTAL_WIDTH / PPM, PORTAL_HEIGHT / PPM, 1, 1, angle);
-        sb.end();
+		if (spawnAnimation.isAnimationFinished(spawnTime)) {
+			spawnTime = 0;
+			mode = Mode.NORMAL;
+		}
+	}
 
-        if (spawnAnimation.isAnimationFinished(spawnTime)) {
-            spawnTime = 0;
-            mode = Mode.NORMAL;
-        }
-    }
-    private void renderPortal(SpriteBatch sb) {
-        sb.begin();
-        sb.draw(objectTexture, center.x - PORTAL_WIDTH / 2 / PPM, center.y - PORTAL_HEIGHT / 2 / PPM,
-                PORTAL_WIDTH / 2 / PPM, PORTAL_HEIGHT / 2 / PPM, PORTAL_WIDTH / PPM,
-                PORTAL_HEIGHT / PPM, 1, 1, angle);
-        sb.end();
-    }
-    private void destroy(SpriteBatch sb) {
-        if (isDrawn) {
-            destroyTime += dt;
-            sb.begin();
-            sb.draw(destroyAnimation.getKeyFrame(destroyTime), center.x - PORTAL_WIDTH / 2 / PPM,
-                    center.y - PORTAL_HEIGHT / 2 / PPM, PORTAL_WIDTH / 2 / PPM, PORTAL_HEIGHT / 2 / PPM,
-                    PORTAL_WIDTH / PPM, PORTAL_HEIGHT / PPM, 1, 1, angle);
-            sb.end();
-        }
+	private void renderPortal(SpriteBatch sb) {
+		sb.begin();
+		sb.draw(objectTexture, center.x - PORTAL_WIDTH / 2 / PPM, center.y - PORTAL_HEIGHT / 2 / PPM,
+				PORTAL_WIDTH / 2 / PPM, PORTAL_HEIGHT / 2 / PPM, PORTAL_WIDTH / PPM,
+				PORTAL_HEIGHT / PPM, 1, 1, angle);
+		sb.end();
+	}
 
-        if (destroyAnimation.isAnimationFinished(destroyTime)) {
-            destroyTime = 0;
-            mode = Mode.EMPTY;
-            isDrawn = false;
-        }
-    }
+	private void destroy(SpriteBatch sb) {
+		if (isDrawn) {
+			destroyTime += dt;
+			sb.begin();
+			sb.draw(destroyAnimation.getKeyFrame(destroyTime), center.x - PORTAL_WIDTH / 2 / PPM,
+					center.y - PORTAL_HEIGHT / 2 / PPM, PORTAL_WIDTH / 2 / PPM, PORTAL_HEIGHT / 2 / PPM,
+					PORTAL_WIDTH / PPM, PORTAL_HEIGHT / PPM, 1, 1, angle);
+			sb.end();
+		}
 
-    // Setters
-    public void setMode(Mode mode) {
-        this.mode = mode;
-    }
+		if (destroyAnimation.isAnimationFinished(destroyTime)) {
+			destroyTime = 0;
+			mode = Mode.EMPTY;
+			isDrawn = false;
+		}
+	}
+
+	// Setters
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+
+	public enum Mode {
+		SPAWN,
+		NORMAL,
+		DESTROY,
+		EMPTY
+	}
 
 }

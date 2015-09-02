@@ -4,10 +4,10 @@
 
 package com.jnv.bounded.gamestates;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.main.Bounded;
@@ -17,77 +17,91 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 public class SplashScreen extends GameState {
-    private Texture splash;
-    private TextureRegion icon;
-    private BitmapFont font;
-    private float loadingFieldWidth, loadingFieldHeight, time, angle, gap;
-    private DecimalFormat format;
-    private Label loadingFont;
 
-    public SplashScreen(GameStateManager gsm) {
-        super(gsm);
+	private TextureRegion icon;
+	private float time, angle, gap;
+	private DecimalFormat format;
+	private Label loadingText;
+	private Actor ballIcon;
 
-        cam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
-        game.textureLoader.loadLoadingScreenSprites();
-        game.res.finishLoading();
+	public SplashScreen(GameStateManager gsm) {
+		super(gsm);
 
-        splash = game.res.getTexture("splash");
-        Random random = new Random();
-        if (random.nextInt(2) == 0) icon = new TextureRegion(game.res.getTexture("ball"));
-        else icon = new TextureRegion(game.res.getTexture("black hole"));
+		cam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
+		game.textureLoader.loadLoadingScreenSprites();
+		game.res.finishLoading();
 
-        loadingFont = new Label("Loading... 99%", Bounded.getHurtmoldFontLabelStyle(50));
-        float loadingFontWidth = loadingFont.getPrefWidth();
-        font = Bounded.getHurtmoldFontLabelStyle(50).font;
-        font.setColor(Color.WHITE);
+		Image image = new Image(game.res.getTexture("splash"));
+		image.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
+		image.layout();
+		stage.addActor(image);
 
-        loadingFieldHeight = 40;
-        gap = 30;
-        loadingFieldWidth += loadingFontWidth + Constants.BALL_RADIUS * 2 + gap;
+		loadingText = new Label("Loading... 99%", Bounded.getFont(50));
+		loadingText.setBounds(
+				(Bounded.WIDTH - loadingText.getPrefWidth()) / 2 + Constants.BALL_RADIUS * 2 + gap,
+				loadingText.getPrefHeight(), loadingText.getPrefWidth(),
+				loadingText.getPrefHeight());
+		loadingText.layout();
+		stage.addActor(loadingText);
 
-        game.textureLoader.loadAll();
+		drawBallIcon();
 
-        format = new DecimalFormat("###");
-    }
+		gap = 30;
 
-    public void update(float dt) {
-        time += dt;
-    }
-    public void handleInput() {
+		game.textureLoader.loadAll();
 
-    }
-    public void render() {
-        if (game.res.update()) gsm.setState(GameStateManager.State.MENU);
+		format = new DecimalFormat("###");
+	}
 
-        calculateAngle();
+	public void update(float dt) {
+		time += dt;
+	}
 
-        cam.update();
-        sb.setProjectionMatrix(cam.combined);
-        sb.begin();
-        sb.draw(splash, 0, 0, Bounded.WIDTH, Bounded.HEIGHT);
-        loadingFont.setText("Loading... " + format.format(game.res.getProgress() * 100 + 1) + "%");
+	public void handleInput() {
 
-        font.draw(sb, loadingFont.getText(),
-                (Bounded.WIDTH - loadingFieldWidth) / 2 + Constants.BALL_RADIUS * 2 + gap,
-                loadingFieldHeight * 2);
-        sb.draw(icon, (Bounded.WIDTH - loadingFieldWidth) / 2, loadingFieldHeight,
-                Constants.BALL_RADIUS, Constants.BALL_RADIUS, Constants.BALL_RADIUS * 2,
-                Constants.BALL_RADIUS * 2, 1, 1, angle);
-        sb.end();
-    }
-    public void dispose() {
-        game.res.unloadTexture("splash");
-    }
+	}
 
-    // Helpers
-    private void calculateAngle() {
-        float delay = 1 / 30f;
-        if (time >= delay) {
-            angle -= 4;
-            time -= delay;
-            if (angle <= 360) {
-                angle += 360;
-            }
-        }
-    }
+	public void render() {
+		if (game.res.update()) gsm.setState(GameStateManager.State.MENU);
+
+		calculateAngle();
+
+		loadingText.setText("Loading... " + format.format(game.res.getProgress() * 100 + 1) + "%");
+
+		stage.draw();
+	}
+
+	public void dispose() {
+
+	}
+
+	// Helpers
+	private void drawBallIcon() {
+		Random random = new Random();
+		if (random.nextInt(2) == 0) icon = new TextureRegion(game.res.getTexture("ball"));
+		else icon = new TextureRegion(game.res.getTexture("black hole"));
+
+		ballIcon = new Actor() {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				batch.draw(icon, (Bounded.WIDTH - loadingText.getWidth() - 60) / 2, loadingText.getHeight(),
+						Constants.BALL_RADIUS, Constants.BALL_RADIUS, Constants.BALL_RADIUS * 2,
+						Constants.BALL_RADIUS * 2, 1, 1, angle);
+			}
+		};
+		ballIcon.setBounds((Bounded.WIDTH - loadingText.getWidth()) / 2, loadingText.getHeight(),
+				Constants.BALL_RADIUS * 2, Constants.BALL_RADIUS * 2);
+		stage.addActor(ballIcon);
+	}
+
+	private void calculateAngle() {
+		float delay = 1 / 30f;
+		if (time >= delay) {
+			angle -= 4;
+			time -= delay;
+			if (angle <= 360) {
+				angle += 360;
+			}
+		}
+	}
 }

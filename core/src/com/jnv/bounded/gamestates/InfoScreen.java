@@ -5,127 +5,121 @@
 package com.jnv.bounded.gamestates;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
-import com.jnv.bounded.inputprocessors.BoundedInput;
-import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
+import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.main.Bounded;
-import com.jnv.bounded.utilities.SimpleButton;
 
 public class InfoScreen extends GameState {
 
-    private Texture page1, page2, page3;
-    private SimpleButton exitButton;
-    private BoundedGestureProcessor gp;
-    private OrthographicCamera Xcam;
-    private int page = 0;
+	private int page = 0;
+	private ScrollPane scrollPane;
+	private Table table;
+	private Label label;
 
-    public InfoScreen(GameStateManager gsm) {
-        super(gsm);
+	public InfoScreen(final GameStateManager gsm) {
+		super(gsm);
 
-        cam = new OrthographicCamera();
-        Xcam = new OrthographicCamera();
-        cam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
-        Xcam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
+		table = new Table();
+		table.add(new Image(game.res.getTexture("infopage1")));
+		table.layout();
+		table.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
+		scrollPane = new ScrollPane(table);
+		scrollPane.setBounds(0, 100, Bounded.WIDTH, Bounded.HEIGHT - 100);
+		scrollPane.layout();
+		scrollPane.setZIndex(0);
+		scrollPane.setScrollingDisabled(true, false);
+		stage.addActor(scrollPane);
 
-        page1 = game.res.getTexture("infopage1");
-        page2 = game.res.getTexture("infopage2");
-        page3 = game.res.getTexture("infopage3");
+		Image xButton = new Image(game.res.getTexture("x"));
+		xButton.layout();
+		xButton.setBounds(Bounded.WIDTH - 100, Bounded.HEIGHT - 100, 100, 100);
+		xButton.addListener(new InputListener(xButton) {
+			@Override
+			public void doAction() {
+				gsm.setState(GameStateManager.State.LEVELSELECTION);
+			}
+		});
+		stage.addActor(xButton);
 
-        exitButton = new SimpleButton(game.res.getTexture("x"),
-                1180, 620, 100, 100);
-        InputMultiplexer im = new InputMultiplexer();
-        im.addProcessor(new BoundedInputProcessor());
-        gp = new BoundedGestureProcessor();
-        GestureDetector gd = new GestureDetector(gp);
-        im.addProcessor(gd);
-        Gdx.input.setInputProcessor(im);
-    }
+		addArrowButtons();
 
-    public void update(float dt) {
-        float newPosY = cam.position.y + gp.getFlingVelocityY() * dt;
-        handleInput();
-        gp.flingDecelerate(dt);
-        if (newPosY < 360 && newPosY > -1800) {
-            cam.position.y += gp.getFlingVelocityY() * dt;
-        }
-        cam.update();
-    }
-    public void handleInput() {
-        if (BoundedInput.pannedDown || BoundedInput.pannedUp) {
-            if ((cam.position.y + BoundedInput.deltaY) < 360 &&
-                    (cam.position.y + BoundedInput.deltaY) > -1800) {
-                cam.position.set(cam.position.x, cam.position.y + BoundedInput.deltaY, 0);
-                cam.update();
-            }
-        }
+		label = new Label("Page " + (page + 1) + "/3", Bounded.getFont(50));
+		label.setBounds((Bounded.WIDTH - label.getPrefWidth()) / 2,
+				(100 - label.getPrefHeight()) / 2, label.getPrefWidth(), label.getPrefHeight());
+		label.layout();
+		stage.addActor(label);
+		setInfoPage(0);
+	}
 
-        if (BoundedInput.leftFling) {
-            nextPage();
-        }
+	public void update(float dt) {
+		stage.act(dt);
+	}
 
-        if (BoundedInput.rightFling) {
-            prevPage();
-        }
+	public void handleInput() {
 
-        if (BoundedInput.isTapped) {
-            if (exitButton.checkIfClicked(BoundedInput.x, BoundedInput.y)) {
-                goToLevelSelect();
-            }
-        }
+	}
 
-    }
-    public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	public void render() {
+		Gdx.gl.glClearColor(0, 0, 0, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        sb.setProjectionMatrix(cam.combined);
-        sb.begin();
-        switch (page) {
-            case 0:
-                sb.draw(page1, 0, -2160, 1280, 2880);
-                break;
-            case 1:
-                sb.draw(page2, 0, -2160, 1280, 2880);
-                break;
-            case 2:
-                sb.draw(page3, 0, -720, 1280, 1440);
-                break;
-            default:
-                break;
-        }
-        sb.end();
+		stage.draw();
+	}
 
-        sb.setProjectionMatrix(Xcam.combined);
-        sb.begin();
-        sb.draw(exitButton.getSkin(), 1180, 620, 100, 100);
-        sb.end();
-    }
-    public void dispose() {
+	public void dispose() {
 
-    }
+	}
 
-    // Helpers
-    private void nextPage() {
-        if (page != 2) {
-            page++;
-            resetCam();
-        }
-    }
-    private void prevPage() {
-        if (page != 0) {
-            page--;
-            resetCam();
-        }
-    }
-    private void resetCam() {
-        cam.position.x = Xcam.position.x;
-        cam.position.y = Xcam.position.y;
-    }
-    private void goToLevelSelect() { gsm.setState(GameStateManager.State.LEVELSELECTION); }
+	private void addArrowButtons() {
+		Image left_arrow = new Image(game.res.getTexture("left_arrow"));
+		left_arrow.layout();
+		left_arrow.setBounds(100, 12.5f, 200 * 3 / 4, 100 * 3 / 4);
+		left_arrow.addListener(new InputListener(left_arrow) {
+			@Override
+			public void doAction() {
+				prevPage();
+			}
+		});
+		stage.addActor(left_arrow);
+
+		Image right_arrow = new Image(game.res.getTexture("right_arrow"));
+		right_arrow.layout();
+		right_arrow.setBounds(Bounded.WIDTH - left_arrow.getWidth() - left_arrow.getX(),
+				left_arrow.getY(), left_arrow.getWidth(), left_arrow.getHeight());
+		right_arrow.addListener(new InputListener(right_arrow) {
+			@Override
+			public void doAction() {
+				nextPage();
+			}
+		});
+		stage.addActor(right_arrow);
+	}
+
+	private void setInfoPage(int page) {
+		table.clearChildren();
+		table.add(new Image(game.res.getTexture("infopage" + (page + 1))));
+		scrollPane.scrollTo(0, scrollPane.getMaxY(), Bounded.WIDTH, Bounded.HEIGHT - 100);
+		scrollPane.setVelocityY(0);
+		label.setText("Page " + (page + 1) + "/3");
+	}
+
+	// Helpers
+	private void nextPage() {
+		if (page != 2) {
+			page++;
+			setInfoPage(page);
+		}
+	}
+
+	private void prevPage() {
+		if (page != 0) {
+			page--;
+			setInfoPage(page);
+		}
+	}
 }

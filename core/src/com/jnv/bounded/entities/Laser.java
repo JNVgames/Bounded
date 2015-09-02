@@ -15,31 +15,31 @@ import static com.jnv.bounded.utilities.Constants.PPM;
 
 public class Laser extends Obstacle {
 
-    private float angle, width;
+	private float angle, width;
 
-    public Laser(float xPos, float yPos, float width, float angle, World world, Bounded bounded) {
-        super ("laser", new Vector2(xPos, yPos), world, bounded);
-        this.width = width;
-        this.angle = angle;
-        PolygonShape laser = new PolygonShape();
-        laser.setAsBox(width / 2 / PPM, LASER_HEIGHT / 2 / PPM, new Vector2(0, 0),
-                (float) Math.toRadians(angle));
+	public Laser(float xPos, float yPos, float width, float angle, World world, Bounded bounded) {
+		super("laser", new Vector2(xPos, yPos), world, bounded);
+		this.width = width;
+		this.angle = angle;
+		PolygonShape laser = new PolygonShape();
+		laser.setAsBox(width / 2 / PPM, LASER_HEIGHT / 2 / PPM, new Vector2(0, 0),
+				(float) Math.toRadians(angle));
 
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = laser;
-        fdef.isSensor = true;
+		FixtureDef fdef = new FixtureDef();
+		fdef.shape = laser;
+		fdef.isSensor = true;
 
-        body.createFixture(fdef).setUserData("laser");
+		body.createFixture(fdef).setUserData("laser");
 
-        laser.dispose();
-    }
+		laser.dispose();
+	}
 
-    public void render(SpriteBatch sb) {
-        sb.begin();
-        sb.draw(objectTexture, center.x - width / 2 / PPM, center.y - LASER_HEIGHT / 2 / PPM,
-                width / 2 / PPM, LASER_HEIGHT / 2 / PPM, width / PPM, LASER_HEIGHT / PPM, 1, 1,
-                angle);
-        sb.end();
-    }
+	public void render(SpriteBatch sb) {
+		sb.begin();
+		sb.draw(objectTexture, center.x - width / 2 / PPM, center.y - LASER_HEIGHT / 2 / PPM,
+				width / 2 / PPM, LASER_HEIGHT / 2 / PPM, width / PPM, LASER_HEIGHT / PPM, 1, 1,
+				angle);
+		sb.end();
+	}
 
 }

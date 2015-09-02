@@ -5,70 +5,59 @@
 package com.jnv.bounded.gamestates;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.BoundedInput;
-import com.jnv.bounded.inputprocessors.BoundedInputProcessor;
+import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.main.Bounded;
 
 public class MenuState extends GameState {
 
-    private float tapWidth;
-    private BitmapFont tapFont;
-    private CharSequence tapStr = "Tap anywhere to begin";
-    private Texture backgroundBall;
+	public MenuState(final GameStateManager gsm) {
+		super(gsm);
 
-    public MenuState(GameStateManager gsm) {
-        super(gsm);
+		Image image = new Image(game.res.getTexture("start screen"));
+		image.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
+		image.layout();
+		stage.addActor(image);
+		cam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
+		stretchViewport.setScreenPosition(0, 0);
 
-        cam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
-        stretchViewport.setScreenPosition(0, 0);
+		Label label = new Label("Tap anywhere to begin", Bounded.getFont(30));
+		label.setBounds((Bounded.WIDTH - label.getPrefWidth()) / 2, Bounded.HEIGHT / 10,
+				label.getPrefWidth(), label.getPrefHeight());
+		label.layout();
+		stage.addActor(label);
 
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        FreeTypeFontGenerator generator =
-                new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
-        tapFont = generator.generateFont(20);
-        tapFont.setColor(Color.WHITE);
+		Actor mask = new Actor();
+		mask.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
+		mask.addListener(new InputListener(mask) {
+			@Override
+			public void doAction() {
+				gsm.setState(GameStateManager.State.LEVELSELECTION);
+			}
+		});
+		stage.addActor(mask);
+	}
 
-        //Used to get the width of the string
-        GlyphLayout glyphLayout = new GlyphLayout();
-        glyphLayout.setText(tapFont, tapStr);
-        tapWidth = glyphLayout.width;
+	public void update(float dt) {
+		stage.act(dt);
+	}
 
-        backgroundBall = game.res.getTexture("start screen");
+	public void handleInput() {
 
-        tapFont.getData().scale(1);
+	}
 
-        Gdx.input.setInputProcessor(new BoundedInputProcessor());
-    }
+	public void render() {
+		Gdx.gl.glClearColor(0, 0, 0, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    public void update(float dt) {
-        handleInput();
-    }
-    public void handleInput() {
-        if (BoundedInput.isReleased()) {
-            Gdx.app.log("MenuState", "clicked: x = " + BoundedInput.x + " y = " + BoundedInput.y);
-            gsm.setState(GameStateManager.State.LEVELSELECTION);
-        }
-    }
-    public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 0); // Set background to black
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		stage.draw();
+	}
 
-        cam.update();
-        sb.setProjectionMatrix(cam.combined);
-        sb.begin();
-        sb.draw(backgroundBall, 0, 0, 1280, 720);
-        tapFont.draw(sb, tapStr, (Bounded.WIDTH / 2) - tapWidth, Bounded.HEIGHT / 10);
-        sb.end();
-    }
-    public void dispose() {
-        Gdx.app.log("MenuState", "dispose()");
-    }
+	public void dispose() {
+		Gdx.app.log("MenuState", "dispose()");
+	}
 }

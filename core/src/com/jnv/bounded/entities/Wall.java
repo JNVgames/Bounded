@@ -16,39 +16,39 @@ import static com.jnv.bounded.utilities.Constants.PPM;
 
 public class Wall extends Obstacle {
 
-    private float width, height, angleDeg;
+	private float width, height, angleDeg;
 
-    public Wall(float xPos, float yPos, float width, float height,
-                float angleDeg, World world, Bounded bounded) {
-        super("wall", new Vector2(xPos, yPos), world, bounded);
+	public Wall(float xPos, float yPos, float width, float height,
+				float angleDeg, World world, Bounded bounded) {
+		super("wall", new Vector2(xPos, yPos), world, bounded);
 
-        this.width = width;
-        this.height = height;
-        this.angleDeg = angleDeg;
+		this.width = width;
+		this.height = height;
+		this.angleDeg = angleDeg;
 
-        center = new Vector2(xPos / PPM, yPos / PPM);
+		center = new Vector2(xPos / PPM, yPos / PPM);
 
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.StaticBody;
-        def.fixedRotation = true;
-        def.position.set(center);
-        body = world.createBody(def);
+		BodyDef def = new BodyDef();
+		def.type = BodyDef.BodyType.StaticBody;
+		def.fixedRotation = true;
+		def.position.set(center);
+		body = world.createBody(def);
 
-        PolygonShape wallShape = new PolygonShape();
-        wallShape.setAsBox(width / 2 / PPM, height / 2 / PPM,
-                new Vector2(0, 0), (float) Math.toRadians(angleDeg));
+		PolygonShape wallShape = new PolygonShape();
+		wallShape.setAsBox(width / 2 / PPM, height / 2 / PPM,
+				new Vector2(0, 0), (float) Math.toRadians(angleDeg));
 
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = wallShape;
-        body.createFixture(fdef);
+		FixtureDef fdef = new FixtureDef();
+		fdef.shape = wallShape;
+		body.createFixture(fdef);
 
-        wallShape.dispose();
-    }
+		wallShape.dispose();
+	}
 
-    public void render(SpriteBatch sb) {
-        sb.begin();
-        sb.draw(objectTexture, center.x - width / 2 / PPM, center.y - height / 2 / PPM, width / 2 / PPM,
-                height / 2 / PPM, width / PPM, height / PPM, 1, 1, angleDeg);
-        sb.end();
-    }
+	public void render(SpriteBatch sb) {
+		sb.begin();
+		sb.draw(objectTexture, center.x - width / 2 / PPM, center.y - height / 2 / PPM, width / 2 / PPM,
+				height / 2 / PPM, width / PPM, height / PPM, 1, 1, angleDeg);
+		sb.end();
+	}
 }
