@@ -20,6 +20,7 @@ import com.jnv.bounded.entities.Portal;
 import com.jnv.bounded.entities.Teleporter;
 import com.jnv.bounded.entities.Wall;
 import com.jnv.bounded.gamestates.LevelState;
+import com.jnv.bounded.level.events.BoundedContactListener;
 import com.jnv.bounded.level.events.LevelComplete;
 import com.jnv.bounded.main.Bounded;
 
@@ -42,7 +43,7 @@ public class LevelEventsHandler {
 	private List<Laser> allLasers;
 	private Portal portal;
 	private LevelState levelState;
-	private com.jnv.bounded.level.events.BoundedContactListener cl;
+	private BoundedContactListener cl;
 	private WallsHistoryManager whm;
 	private LevelComplete levelComplete;
 	private boolean levelCompleted = false;
@@ -315,8 +316,7 @@ public class LevelEventsHandler {
 	private void getTargetTeleporter(int target, Ball ball) {
 		for (Teleporter tp : allTeleporters) {
 			if (target == tp.getTPNum()) {
-				if (!tp.update(ball, cl.getTmpVelocity()))
-					levelState.resetBall();
+				tp.update(ball, cl.getTmpVelocity());
 				break;
 			}
 		}
@@ -394,6 +394,5 @@ public class LevelEventsHandler {
 			key.update(false);
 		}
 	}
-
 
 }

@@ -47,13 +47,15 @@ public class Teleporter extends Obstacle {
 						TELEPORTER_WIDTH / 4 * (float) Math.sin(Math.toRadians(angle)) / PPM),
 				(float) Math.toRadians(angle));
 		fdef.shape = teleporter;
+		fdef.isSensor = true;
 		body.createFixture(fdef).setUserData("teleporter");
 
 		teleporter.dispose();
 	}
 
 	public boolean update(Ball ball, Vector2 velocity) {
-		if (ball.getBody() != null && velocity != null) {
+		if (ball.getBody() != null) {
+			if (Bounded.debug && velocity == null) throw new AssertionError("Ball velocity is null");
 			float ballSpeed = velocity.len();
 
 			ball.getBody().setTransform(center.x + TELEPORTER_DISTANCE *

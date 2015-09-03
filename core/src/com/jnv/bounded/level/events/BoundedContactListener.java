@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.jnv.bounded.main.Bounded;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ public class BoundedContactListener implements ContactListener {
 
 	private boolean isTouchingBlackHoleCenter;
 	private boolean isTouchingKey;
-	private boolean isTouchingUserWall;
 	private int numPortalContacts;
 	private int numGumCloudContacts;
 	private boolean isTouchingLaser;
@@ -139,12 +139,17 @@ public class BoundedContactListener implements ContactListener {
 				ball = fa.getBody();
 			}
 
-			// UserWall
-			if (fa.getUserData() != null && fa.getUserData().equals("userWall")) {
-				isTouchingUserWall = true;
-			}
-			if (fb.getUserData() != null && fb.getUserData().equals("userWall")) {
-				isTouchingUserWall = true;
+			// Teleporter
+			if (fa.getUserData() != null && fa.getUserData().equals("teleporter")) {
+				allTeleporters.add(fa.getBody());
+				if (Bounded.debug && fb.getBody().getLinearVelocity() == null)
+					throw new AssertionError("BoundedContactListener: ball velocity is null");
+				tmpVelocity = fb.getBody().getLinearVelocity();
+			} else if (fb.getUserData() != null && fb.getUserData().equals("teleporter")) {
+				allTeleporters.add(fb.getBody());
+				if (Bounded.debug && fa.getBody().getLinearVelocity() == null)
+					throw new AssertionError("BoundedContactListener: ball velocity is null");
+				tmpVelocity = fa.getBody().getLinearVelocity();
 			}
 		}
 	}
@@ -223,32 +228,10 @@ public class BoundedContactListener implements ContactListener {
 			} else if (fb.getUserData() != null && fb.getUserData().equals("laser")) {
 				isTouchingLaser = false;
 			}
-
-			if (fa.getUserData() != null && fa.getUserData().equals("userWall")) {
-				isTouchingUserWall = false;
-			} else if (fb.getUserData() != null && fb.getUserData().equals("userWall")) {
-				isTouchingUserWall = false;
-			}
 		}
 	}
 
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		Fixture fa = contact.getFixtureA();
-		Fixture fb = contact.getFixtureB();
-
-		if (fa == null || fb == null) {
-			return;
-		}
-
-		// Teleporter
-		if (fa.getUserData() != null && fa.getUserData().equals("teleporter")) {
-			allTeleporters.add(fa.getBody());
-			tmpVelocity = fb.getBody().getLinearVelocity();
-		} else if (fb.getUserData() != null && fb.getUserData().equals("teleporter")) {
-			allTeleporters.add(fb.getBody());
-			tmpVelocity = fa.getBody().getLinearVelocity();
-		}
-
 	}
 
 	public void postSolve(Contact contact, ContactImpulse impulse) {
@@ -295,10 +278,6 @@ public class BoundedContactListener implements ContactListener {
 		return isTouchingLaser;
 	}
 
-	public boolean isTouchingUserWall() {
-		return isTouchingUserWall;
-	}
-
 	public List<Body> getAllArrows() {
 		return allArrows;
 	}
@@ -332,18 +311,4 @@ public class BoundedContactListener implements ContactListener {
 		tmpVelocity = null;
 		return tmp;
 	}
-
-	// Setters
-	public void resetContacts() {
-		allArrows = new ArrayList<Body>();
-		allBlackHoles = new ArrayList<Body>();
-		allFans = new ArrayList<Body>();
-		allMagnets = new ArrayList<Body>();
-		allTeleporters = new ArrayList<Body>();
-
-		isTouchingBlackHoleCenter = false;
-		isTouchingKey = false;
-		isTouchingLaser = false;
-	}
-
 }

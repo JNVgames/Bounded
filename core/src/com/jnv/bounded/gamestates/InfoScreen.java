@@ -100,14 +100,6 @@ public class InfoScreen extends GameState {
 		stage.addActor(right_arrow);
 	}
 
-	private void setInfoPage(int page) {
-		table.clearChildren();
-		table.add(new Image(game.res.getTexture("infopage" + (page + 1))));
-		scrollPane.scrollTo(0, scrollPane.getMaxY(), Bounded.WIDTH, Bounded.HEIGHT - 100);
-		scrollPane.setVelocityY(0);
-		label.setText("Page " + (page + 1) + "/3");
-	}
-
 	// Helpers
 	private void nextPage() {
 		if (page != 2) {
@@ -121,5 +113,14 @@ public class InfoScreen extends GameState {
 			page--;
 			setInfoPage(page);
 		}
+	}
+
+	// Setters
+	private void setInfoPage(int page) {
+		table.clearChildren();
+		table.add(new Image(game.res.getTexture("infopage" + (page + 1))));
+		scrollPane.scrollTo(0, scrollPane.getMaxY(), Bounded.WIDTH, Bounded.HEIGHT - 100);
+		scrollPane.setVelocityY(0);
+		label.setText("Page " + (page + 1) + "/3");
 	}
 }

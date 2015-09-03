@@ -146,30 +146,6 @@ public class WallsHistoryManager {
 		return totalDistance;
 	}
 
-	public List<UserWall> getAllWalls() {
-		return allWalls;
-	}
-
-	public void setAllWalls(List<UserWall> allWalls) {
-		this.allWalls = allWalls;
-	}
-
-	public Stack<WallEntry> getWallEntries() {
-		return wallEntries;
-	}
-
-	public void setWallEntries(Stack<WallEntry> wallEntries) {
-		this.wallEntries = wallEntries;
-	}
-
-	public Stack<WallEntry> getRedoEntries() {
-		return redoEntries;
-	}
-
-	public void setRedoEntries(Stack<WallEntry> redoEntries) {
-		this.redoEntries = redoEntries;
-	}
-
 	// Setters
 	public void draw() {
 
@@ -230,7 +206,7 @@ public class WallsHistoryManager {
 
 							tmpPoints.add(finalX);
 							tmpPoints.add(finalY);
-							tmpArrayOfPoints.add(tmpPoints);
+							if (tmpPoints.size() == 4) tmpArrayOfPoints.add(tmpPoints);
 							canStore = true;
 
 							// Reset tmpPoints
@@ -269,7 +245,6 @@ public class WallsHistoryManager {
 	}
 
 	public void erase() {
-
 		if (BoundedInput.isTapped()) {
 			canStore = false;
 			eraseEntry = new WallEntry("erase");
@@ -320,7 +295,6 @@ public class WallsHistoryManager {
 	}
 
 	public void undo() {
-
 		if (!wallEntries.isEmpty()) {
 
 			// Check if action is draw or erase
@@ -349,7 +323,6 @@ public class WallsHistoryManager {
 	}
 
 	public void redo() {
-
 		if (!redoEntries.isEmpty()) {
 
 			// Check if action is draw or erase

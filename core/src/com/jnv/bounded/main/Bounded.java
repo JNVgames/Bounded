@@ -38,25 +38,6 @@ public class Bounded extends Game {
 	private SpriteBatch sb;
 	private Stage stage;
 
-	// Setters
-	public static void unlockLevel(int level) {
-		lockedLevels.set(level - 1, false);
-	}
-
-	public static boolean isLevelUnlocked(int level) {
-		return lockedLevels.get(level - 1);
-	}
-
-	// Static convenience methods
-	public static Label.LabelStyle getFont(int fontSize) {
-		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
-				new FreeTypeFontGenerator.FreeTypeFontParameter();
-		fontDetails.size = fontSize;
-		Label.LabelStyle labelStyle = new Label.LabelStyle();
-		labelStyle.font = generator.generateFont(fontDetails);
-		return labelStyle;
-	}
-
 	public void create() {
 		init();
 
@@ -150,4 +131,24 @@ public class Bounded extends Game {
 	public Stage getStage() {
 		return stage;
 	}
+
+	public static boolean isLevelUnlocked(int level) {
+		return lockedLevels.get(level - 1);
+	}
+
+	// Setters
+	public static void unlockLevel(int level) {
+		lockedLevels.set(level - 1, false);
+	}
+
+	// Static convenience methods
+	public static Label.LabelStyle getFont(int fontSize) {
+		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
+				new FreeTypeFontGenerator.FreeTypeFontParameter();
+		fontDetails.size = fontSize;
+		Label.LabelStyle labelStyle = new Label.LabelStyle();
+		labelStyle.font = generator.generateFont(fontDetails);
+		return labelStyle;
+	}
+
 }

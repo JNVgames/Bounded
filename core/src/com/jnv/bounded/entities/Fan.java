@@ -60,9 +60,9 @@ public class Fan {
 		body.createFixture(fdef);
 
 		// Create fan blowing area
-		fan.setAsBox(FAN_RANGE / 2 / PPM, FAN_HEIGHT / 2 / PPM,
-				new Vector2((FAN_WIDTH + FAN_RANGE) / 2 * angleValueX / PPM,
-						(FAN_WIDTH + FAN_RANGE) / 2 * angleValueY / PPM),
+		fan.setAsBox((FAN_RANGE + FAN_WIDTH) / 2 / PPM, FAN_HEIGHT / 2 / PPM,
+				new Vector2(FAN_RANGE / 2 * angleValueX / PPM,
+						FAN_RANGE / 2 * angleValueY / PPM),
 				(float) Math.toRadians(angle));
 		fdef.shape = fan;
 		fdef.isSensor = true;

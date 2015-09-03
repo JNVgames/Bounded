@@ -97,7 +97,6 @@ public class TextureLoader {
 		bounded.res.loadTexture("game_images/settings_screen854x720.png", "opacity_mask");
 		bounded.res.loadTexture("game_images/arrow_left200x100.png", "left_arrow");
 		bounded.res.loadTexture("game_images/arrow_right200x100.png", "right_arrow");
-
 	}
 
 	private void loadBallAnimations() {

@@ -14,8 +14,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.jnv.bounded.handlers.ButtonManager;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
 import com.jnv.bounded.inputprocessors.BoundedInput;
@@ -36,6 +36,13 @@ import static com.jnv.bounded.utilities.Constants.PPM;
 
 public class LevelState extends GameState {
 
+	public enum EditState {
+		DRAW,
+		ERASE,
+		PLAY,
+		OPTIONS
+	}
+
 	private static int level;
 	private static float maxDistance;
 	private World world;
@@ -51,8 +58,8 @@ public class LevelState extends GameState {
 	private boolean isReset = false;
 	private Toolbar toolbar;
 	private Panning panning;
-	private ButtonManager buttonManager;
 	private float time = 0;
+	private Box2DDebugRenderer b2dr;
 
 	public LevelState(GameStateManager gsm) {
 		super(gsm);
@@ -63,32 +70,7 @@ public class LevelState extends GameState {
 		loadFont();
 	}
 
-	public static float scale(float x) {
-		return x / PPM;
-	}
-
-	public static int getLevel() {
-		return level;
-	}
-
-	public static void setLevel(int lv) {
-		level = lv;
-	}
-
-	public static float getMaxDistance() {
-		return maxDistance;
-	}
-
-	public static void setNextLevel() {
-		level++;
-	}
-
-	public static void setMaxDistance() {
-		maxDistance = LevelDistances.getDistance(level);
-	}
-
 	public void update(float dt) {
-		System.out.println("BoundedInput: x - " + BoundedInput.x + ", y - " + BoundedInput.y);
 		if (canPlay(dt)) {
 			handleInput();
 			stepWorld(dt);
@@ -147,13 +129,13 @@ public class LevelState extends GameState {
 		world = new World(new Vector2(0, GRAVITY), true);
 		cl = new BoundedContactListener();
 		world.setContactListener(cl);
+		b2dr = new Box2DDebugRenderer();
 
 		whm = new WallsHistoryManager(this);
 		leh = new LevelEventsHandler(this);
 		tml = new TiledMapLoader(this);
 		tml.createObjects();
 
-		buttonManager = new ButtonManager(game);
 		toolbar = new Toolbar(this);
 		panning = new Panning(this);
 	}
@@ -210,6 +192,7 @@ public class LevelState extends GameState {
 		sb.setProjectionMatrix(cam.combined);
 		leh.render(sb);
 		whm.render(sb);
+		if (Bounded.debug) b2dr.render(world, cam.combined);
 	}
 
 	private void HUDCamRender() {
@@ -220,9 +203,6 @@ public class LevelState extends GameState {
 		distanceFont.draw(sb, "Level " + level + ", " + "Distance: " +
 				format.format(whm.getTotalDistance()) + " / " +
 				format.format(maxDistance), 20, Bounded.HEIGHT - 20);
-
-		// Update the toolbar on bottom
-		//toolbar.render(sb);
 
 		leh.levelCompleteRender(sb);
 		sb.end();
@@ -259,10 +239,6 @@ public class LevelState extends GameState {
 		return tml;
 	}
 
-	public ButtonManager getButtonManager() {
-		return buttonManager;
-	}
-
 	public World getWorld() {
 		return world;
 	}
@@ -280,16 +256,16 @@ public class LevelState extends GameState {
 		return editState;
 	}
 
-	public void setEditState(EditState state) {
-		editState = state;
-	}
-
 	public EditState getCacheState() {
 		return cache;
 	}
 
-	public void setCacheState(EditState state) {
-		cache = state;
+	public static int getLevel() {
+		return level;
+	}
+
+	public static float getMaxDistance() {
+		return maxDistance;
 	}
 
 	// Setters
@@ -317,10 +293,28 @@ public class LevelState extends GameState {
 		}
 	}
 
-	public enum EditState {
-		DRAW,
-		ERASE,
-		PLAY,
-		OPTIONS
+	public void setCacheState(EditState state) {
+		cache = state;
 	}
+
+	public static void setLevel(int lv) {
+		level = lv;
+	}
+
+	public static void setNextLevel() {
+		level++;
+	}
+
+	public static void setMaxDistance() {
+		maxDistance = LevelDistances.getDistance(level);
+	}
+
+	public void setEditState(EditState state) {
+		editState = state;
+	}
+
+	public static float scale(float x) {
+		return x / PPM;
+	}
+
 }

@@ -38,7 +38,7 @@ public class SaveGameHelper {
 			List<Boolean> levelsList = new ArrayList<Boolean>();
 
 			for (int i = 0; i < 40; i++) {
-				if (i == 0) {
+				if (i == 0 || Bounded.debug) {
 					levelsList.add(false);
 				} else {
 					levelsList.add(true);
