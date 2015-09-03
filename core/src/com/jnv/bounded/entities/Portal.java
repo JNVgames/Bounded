@@ -7,8 +7,8 @@ package com.jnv.bounded.entities;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jnv.bounded.main.Bounded;
 
@@ -28,13 +28,9 @@ public class Portal extends Obstacle {
 
 		this.angle = angle;
 
-		EdgeShape portal = new EdgeShape();
-		portal.set(
-				(float) (-PORTAL_WIDTH * Math.cos(Math.toRadians(angle)) / 2 / PPM),
-				(float) (-PORTAL_WIDTH * Math.sin(Math.toRadians(angle)) / 2 / PPM),
-				(float) (PORTAL_WIDTH * Math.cos(Math.toRadians(angle)) / 2 / PPM),
-				(float) (PORTAL_WIDTH * Math.sin(Math.toRadians(angle)) / 2 / PPM)
-		);
+		PolygonShape portal = new PolygonShape();
+		portal.setAsBox(PORTAL_WIDTH / 2 / PPM, PORTAL_HEIGHT / 2 / PPM, new Vector2(0, 0),
+				(float) Math.toRadians(angle));
 
 		FixtureDef fdef = new FixtureDef();
 		fdef.shape = portal;
