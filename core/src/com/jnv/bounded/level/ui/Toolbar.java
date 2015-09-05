@@ -69,7 +69,7 @@ public class Toolbar {
 		stage.addActor(toolbarButton);
 	}
 
-	private void showToolbar() {
+	public void showToolbar() {
 		isToolbarShowing = true;
 		for (ToolbarButton toolbarButton : toolbarButtons) {
 			toolbarButton.setVisible(true);
@@ -77,7 +77,7 @@ public class Toolbar {
 		}
 	}
 
-	private void hideToolbar() {
+	public void hideToolbar() {
 		isToolbarShowing = false;
 		for (ToolbarButton toolbarButton : toolbarButtons) {
 			toolbarButton.setVisible(false);

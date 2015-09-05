@@ -66,7 +66,7 @@ public class SplashScreen extends GameState {
 
 		calculateAngle();
 
-		loadingText.setText("Loading... " + format.format(game.res.getProgress() * 100 + 1) + "%");
+		loadingText.setText("Loading... " + format.format(game.res.getProgress() * 100) + "%");
 
 		stage.draw();
 	}

@@ -25,6 +25,7 @@ import com.jnv.bounded.level.events.Panning;
 import com.jnv.bounded.level.managers.LevelEventsHandler;
 import com.jnv.bounded.level.managers.WallsHistoryManager;
 import com.jnv.bounded.level.maploader.TiledMapLoader;
+import com.jnv.bounded.level.ui.FirstTimeGuide;
 import com.jnv.bounded.level.ui.Toolbar;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.utilities.LevelDistances;
@@ -60,9 +61,13 @@ public class LevelState extends GameState {
 	private Panning panning;
 	private float time = 0;
 	private Box2DDebugRenderer b2dr;
+	private FirstTimeGuide firstTimeGuide;
 
 	public LevelState(GameStateManager gsm) {
 		super(gsm);
+		if (level <= 8) {
+			firstTimeGuide = new FirstTimeGuide(level, gsm);
+		}
 		loadLevelServices();
 		loadInputProcessors();
 		loadCamsAndHUD();

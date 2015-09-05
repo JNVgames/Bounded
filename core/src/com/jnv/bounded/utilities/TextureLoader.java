@@ -28,6 +28,7 @@ public class TextureLoader {
 	}
 
 	public void loadAll() {
+		loadFirstTimeHelpers();
 		loadBackground();
 		loadEntities();
 
@@ -42,6 +43,15 @@ public class TextureLoader {
 		loadMenuStateTextures();
 
 		loadInfoScreens();
+	}
+
+	private void loadFirstTimeHelpers() {
+		for (int i = 1; i <= 15; i++) {
+			bounded.res.loadTexture("helpers/level1/level1/" + i + ".png", "helper-level1-" + i);
+			bounded.res.loadTexture("helpers/level1/level1/mask" + i + ".png",
+					"helper-level1-mask" + i);
+		}
+		bounded.res.loadTexture("helpers/mask.png", "screen_mask");
 	}
 
 	private void loadBackground() {
