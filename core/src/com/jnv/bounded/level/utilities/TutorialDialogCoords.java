@@ -41,8 +41,12 @@ public final class TutorialDialogCoords {
 			new Vector2((Bounded.WIDTH - DIALOG_WIDTH) / 2, (Bounded.HEIGHT - DIALOG_HEIGHT) / 2)
 	};
 
+	public static final Vector2[] level3 = {
+			new Vector2(0, Bounded.HEIGHT - 472)
+	};
+
 	public static final Vector2[][] allCoords = {
-			level1, level2
+			level1, level2, level3
 	};
 
 	public static final Dimensions[] level1Triggers = {
@@ -71,7 +75,11 @@ public final class TutorialDialogCoords {
 			new Dimensions(level2[2], DIALOG_WIDTH, DIALOG_HEIGHT)
 	};
 
+	public static final Dimensions[] level3Triggers = {
+			new Dimensions(level3[0], DIALOG_WIDTH, DIALOG_HEIGHT)
+	};
+
 	public static final Dimensions[][] levelTriggers = {
-			level1Triggers, level2Triggers
+			level1Triggers, level2Triggers, level3Triggers
 	};
 }

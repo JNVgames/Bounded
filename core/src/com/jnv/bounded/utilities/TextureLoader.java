@@ -56,6 +56,9 @@ public class TextureLoader {
 			bounded.res.loadTexture("helpers/level1/level2/mask" + i + ".png",
 					"helper-level2-mask" + i);
 		}
+		bounded.res.loadTexture("helpers/level1/level3/" + 1 + ".png", "helper-level3-" + 1);
+		bounded.res.loadTexture("helpers/level1/level3/mask" + 1 + ".png",
+				"helper-level3-mask" + 1);
 		bounded.res.loadTexture("helpers/mask.png", "screen_mask");
 		bounded.res.loadTexture("helpers/skip_level_button.png", "skip_level");
 	}

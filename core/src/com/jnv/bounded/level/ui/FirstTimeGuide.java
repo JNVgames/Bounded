@@ -26,14 +26,15 @@ public class FirstTimeGuide {
 	private static final int[] numTextures = {
 			TutorialDialogCoords.allCoords[0].length,
 			TutorialDialogCoords.allCoords[1].length,
-			0, 0, 0, 0, 0, 0
+			TutorialDialogCoords.allCoords[2].length,
+			0, 0, 0, 0, 0
 	};
 
 	public FirstTimeGuide(final int level, GameStateManager gsm, final LevelState levelState) {
 		this.levelState = levelState;
 		this.level = level;
 		stage = gsm.game().getStage();
-		levelState.setDrawable(false);
+		if (numTextures[level - 1] > 0) levelState.setDrawable(false);
 		BoundedAssetManager res = gsm.game().res;
 		allActors = new Group();
 		skipLevelButton = new Image(res.getTexture("skip_level"));
