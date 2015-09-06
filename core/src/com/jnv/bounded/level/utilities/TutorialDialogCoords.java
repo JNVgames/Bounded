@@ -14,8 +14,8 @@ public final class TutorialDialogCoords {
 	public static final float DIALOG_HALF_WIDTH = 400;
 	public static final float DIALOG_HALF_HEIGHT = 200;
 
-	public static final Dimensions SKIP_LEVEL_DIM = new Dimensions(Bounded.WIDTH / 2,
-			Bounded.HEIGHT - 91, 377, 91, true, false);
+	public static final Dimensions SKIP_LEVEL_DIM = new Dimensions(Bounded.WIDTH - 377,
+			Bounded.HEIGHT - 91, 377, 91);
 
 	public static final Vector2[] level1 = {
 			new Vector2((Bounded.WIDTH - DIALOG_WIDTH) / 2, (Bounded.HEIGHT - DIALOG_HEIGHT) / 2),
