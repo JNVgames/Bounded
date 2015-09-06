@@ -66,7 +66,7 @@ public class LevelState extends GameState {
 	public LevelState(GameStateManager gsm) {
 		super(gsm);
 		if (level <= 8) {
-			firstTimeGuide = new FirstTimeGuide(level, gsm);
+			firstTimeGuide = new FirstTimeGuide(level, gsm, this);
 		}
 		loadLevelServices();
 		loadInputProcessors();
@@ -244,6 +244,8 @@ public class LevelState extends GameState {
 	public TiledMapLoader getTml() {
 		return tml;
 	}
+
+	public Toolbar getToolbar() { return toolbar; }
 
 	public World getWorld() {
 		return world;

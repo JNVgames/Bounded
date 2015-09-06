@@ -101,6 +101,16 @@ public class LevelEventsHandler {
 		laserRender(sb);
 	}
 
+	// Level services
+	public void setPlayMode() {
+		if (levelState.getEditState() != LevelState.EditState.PLAY) {
+			levelState.setEditState(LevelState.EditState.PLAY);
+			levelState.setCacheState(LevelState.EditState.PLAY);
+			levelState.getToolbar().hideToolbar();
+			levelState.getToolbar().setButtonsGray();
+		}
+	}
+
 	// Helper Functions
 	private void levelCompletionEvents(SpriteBatch sb) {
 		levelCompleted = true;

@@ -89,12 +89,7 @@ public class Toolbar {
 		stage.addActor(createToolbarButton("play", 1, true, new Runnable() {
 			@Override
 			public void run() {
-				if (levelState.getEditState() != LevelState.EditState.PLAY) {
-					levelState.setEditState(LevelState.EditState.PLAY);
-					levelState.setCacheState(LevelState.EditState.PLAY);
-					hideToolbar();
-					setButtonsGray();
-				}
+				levelState.getLevelEventsHandler().setPlayMode();
 			}
 		}));
 		stage.addActor(createToolbarButton("erase_all", 4, true, new Runnable() {
