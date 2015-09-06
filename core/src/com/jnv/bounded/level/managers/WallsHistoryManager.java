@@ -281,13 +281,12 @@ public class WallsHistoryManager {
 				bodiesToRemove.push(hitBody);
 				setErase(hitBody);
 				canStore = true;
-
 			}
 		}
 
 		if (BoundedInput.isReleased()) {
 			if (canStore) {
-				if (!eraseEntry.isEmpty()) {
+				if (eraseEntry != null && !eraseEntry.isEmpty()) {
 					wallEntries.push(eraseEntry);
 				}
 			}

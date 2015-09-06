@@ -47,31 +47,36 @@ public class TextureLoader {
 
 	private void loadFirstTimeHelpers() {
 		for (int i = 1; i <= 15; i++) {
-			bounded.res.loadTexture("helpers/level1/level1/" + i + ".png", "helper-level1-" + i);
-			bounded.res.loadTexture("helpers/level1/level1/mask" + i + ".png",
+			bounded.res.loadTexture("helpers/level1/" + i + ".png", "helper-level1-" + i);
+			bounded.res.loadTexture("helpers/level1/mask" + i + ".png",
 					"helper-level1-mask" + i);
 		}
 		for (int i = 1; i <= 3; i++) {
-			bounded.res.loadTexture("helpers/level1/level2/" + i + ".png", "helper-level2-" + i);
-			bounded.res.loadTexture("helpers/level1/level2/mask" + i + ".png",
+			bounded.res.loadTexture("helpers/level2/" + i + ".png", "helper-level2-" + i);
+			bounded.res.loadTexture("helpers/level2/mask" + i + ".png",
 					"helper-level2-mask" + i);
 		}
-		bounded.res.loadTexture("helpers/level1/level3/1.png", "helper-level3-1");
-		bounded.res.loadTexture("helpers/level1/level3/mask1.png", "helper-level3-mask1");
-		bounded.res.loadTexture("helpers/level1/level4/1.png", "helper-level4-1");
-		bounded.res.loadTexture("helpers/level1/level4/mask1.png", "helper-level4-mask1");
-		bounded.res.loadTexture("helpers/level1/level5/1.png", "helper-level5-1");
-		bounded.res.loadTexture("helpers/level1/level5/mask1.png", "helper-level5-mask1");
-		bounded.res.loadTexture("helpers/level1/level6/1.png", "helper-level6-1");
-		bounded.res.loadTexture("helpers/level1/level6/mask1.png", "helper-level6-mask1");
+		bounded.res.loadTexture("helpers/level3/1.png", "helper-level3-1");
+		bounded.res.loadTexture("helpers/level3/mask1.png", "helper-level3-mask1");
+		bounded.res.loadTexture("helpers/level4/1.png", "helper-level4-1");
+		bounded.res.loadTexture("helpers/level4/mask1.png", "helper-level4-mask1");
+		bounded.res.loadTexture("helpers/level5/1.png", "helper-level5-1");
+		bounded.res.loadTexture("helpers/level5/mask1.png", "helper-level5-mask1");
+		bounded.res.loadTexture("helpers/level6/1.png", "helper-level6-1");
+		bounded.res.loadTexture("helpers/level6/mask1.png", "helper-level6-mask1");
+		for (int i = 1; i <= 2; i++) {
+			bounded.res.loadTexture("helpers/level7/" + i + ".png", "helper-level7-" + i);
+			bounded.res.loadTexture("helpers/level7/mask" + i + ".png",
+					"helper-level7-mask" + i);
+		}
+		bounded.res.loadTexture("helpers/level8/1.png", "helper-level8-1");
+		bounded.res.loadTexture("helpers/level8/mask1.png", "helper-level8-mask1");
+
 		bounded.res.loadTexture("helpers/mask.png", "screen_mask");
 		bounded.res.loadTexture("helpers/skip_level_button.png", "skip_level");
 	}
 
 	private void loadBackground() {
-		for (int i = 1; i <= 8; i++) {
-			bounded.res.loadTexture("helpers/level" + i + ".png", "helper" + i);
-		}
 		bounded.res.loadTexture("backgrounds/blue1920x1080.png", "blue background");
 		bounded.res.loadTexture("backgrounds/green1920x1080.png", "green background");
 		bounded.res.loadTexture("backgrounds/orange1920x1080.png", "orange background");
