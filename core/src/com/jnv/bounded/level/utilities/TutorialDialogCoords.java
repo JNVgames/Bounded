@@ -1,7 +1,8 @@
-package com.jnv.bounded.utilities;
+package com.jnv.bounded.level.utilities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.utilities.Dimensions;
 
 import static com.jnv.bounded.level.ui.Toolbar.TOOLBAR_BUTTON_PADDING;
 import static com.jnv.bounded.level.ui.Toolbar.TOOLBAR_BUTTON_SIZE;
@@ -12,6 +13,9 @@ public final class TutorialDialogCoords {
 	public static final float DIALOG_HEIGHT = 400;
 	public static final float DIALOG_HALF_WIDTH = 400;
 	public static final float DIALOG_HALF_HEIGHT = 200;
+
+	public static final Dimensions SKIP_LEVEL_DIM = new Dimensions(Bounded.WIDTH / 2,
+			Bounded.HEIGHT - 91, 377, 91, true, false);
 
 	public static final Vector2[] level1 = {
 			new Vector2((Bounded.WIDTH - DIALOG_WIDTH) / 2, (Bounded.HEIGHT - DIALOG_HEIGHT) / 2),
@@ -29,6 +33,14 @@ public final class TutorialDialogCoords {
 			new Vector2(660 - DIALOG_HALF_WIDTH, 120),
 			new Vector2(792 - DIALOG_HALF_WIDTH, 120),
 			new Vector2(0, 120)
+	};
+
+	public static final Vector2[] level2 = {
+
+	};
+
+	public static final Vector2[][] allCoords = {
+			level1
 	};
 
 	public static final Dimensions[] level1Triggers = {

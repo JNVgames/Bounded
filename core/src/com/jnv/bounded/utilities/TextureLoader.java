@@ -52,6 +52,7 @@ public class TextureLoader {
 					"helper-level1-mask" + i);
 		}
 		bounded.res.loadTexture("helpers/mask.png", "screen_mask");
+		bounded.res.loadTexture("helpers/skip_level_button.png", "skip_level");
 	}
 
 	private void loadBackground() {

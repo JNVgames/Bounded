@@ -28,6 +28,8 @@ import com.jnv.bounded.level.maploader.TiledMapLoader;
 import com.jnv.bounded.level.ui.FirstTimeGuide;
 import com.jnv.bounded.level.ui.Toolbar;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.scene2d.Actor;
+import com.jnv.bounded.scene2d.InputListener;
 import com.jnv.bounded.utilities.LevelDistances;
 
 import java.text.DecimalFormat;
@@ -56,7 +58,7 @@ public class LevelState extends GameState {
 	private LevelEventsHandler leh;
 	private TiledMapLoader tml;
 	private EditState editState = EditState.DRAW, cache = EditState.DRAW;
-	private boolean isReset = false;
+	private boolean isReset = false, isDrawable = true;
 	private Toolbar toolbar;
 	private Panning panning;
 	private float time = 0;
@@ -73,7 +75,18 @@ public class LevelState extends GameState {
 		loadCamsAndHUD();
 		setBackground();
 		loadFont();
-		firstTimeGuide.addToStage();
+		if (firstTimeGuide != null) firstTimeGuide.addToStage();
+		if (Bounded.debug) {
+			final Actor unlockLevel = new Actor();
+			unlockLevel.setBounds(0, 0, 100, 100);
+			unlockLevel.addListener(new InputListener(unlockLevel) {
+				@Override
+				public void doAction() {
+					leh.levelCompletionEvents(sb);
+				}
+			});
+			stage.addActor(unlockLevel);
+		}
 	}
 
 	public void update(float dt) {
@@ -90,7 +103,7 @@ public class LevelState extends GameState {
 	public void handleInput() {
 		//toolbar.handleInput();
 		panning.handleInput();
-		if ((!BoundedInput.isPanned) && (!BoundedInput.zoomed)) {
+		if ((!BoundedInput.isPanned) && (!BoundedInput.zoomed) && isDrawable) {
 
 			if (BoundedInput.isTapped() || BoundedInput.isDragged()
 					|| BoundedInput.isReleased()) {
@@ -219,8 +232,6 @@ public class LevelState extends GameState {
 		sb.begin();
 		sb.draw(background, stretchViewport.getScreenX(), stretchViewport.getScreenY(),
 				Bounded.WIDTH, Bounded.HEIGHT);
-		if (level >= 1 && level <= 8) sb.draw(game.res.getTexture("helper" + level),
-				stretchViewport.getScreenX(), stretchViewport.getScreenY(), Bounded.WIDTH, Bounded.HEIGHT);
 		sb.end();
 	}
 
@@ -277,6 +288,10 @@ public class LevelState extends GameState {
 	}
 
 	// Setters
+	public void setDrawable(boolean drawable) {
+		isDrawable = drawable;
+	}
+
 	public void resetBall() {
 		if (!isReset) {
 			leh.resetBall();

@@ -112,7 +112,7 @@ public class LevelEventsHandler {
 	}
 
 	// Helper Functions
-	private void levelCompletionEvents(SpriteBatch sb) {
+	public void levelCompletionEvents(SpriteBatch sb) {
 		levelCompleted = true;
 		destroyedPosition = ball.getBody().getPosition();
 		ball.setMode(Ball.Mode.DESTROY);
