@@ -36,11 +36,13 @@ public final class TutorialDialogCoords {
 	};
 
 	public static final Vector2[] level2 = {
-
+			new Vector2(1133 - DIALOG_WIDTH, 345 + 30 - DIALOG_HALF_HEIGHT),
+			new Vector2(0, Bounded.HEIGHT - 70 - DIALOG_HEIGHT),
+			new Vector2((Bounded.WIDTH - DIALOG_WIDTH) / 2, (Bounded.HEIGHT - DIALOG_HEIGHT) / 2)
 	};
 
 	public static final Vector2[][] allCoords = {
-			level1
+			level1, level2
 	};
 
 	public static final Dimensions[] level1Triggers = {
@@ -48,7 +50,7 @@ public final class TutorialDialogCoords {
 			new Dimensions(level1[1], DIALOG_WIDTH, DIALOG_HEIGHT),
 			new Dimensions(level1[2], DIALOG_WIDTH, DIALOG_HEIGHT),
 			new Dimensions(level1[3], DIALOG_WIDTH, DIALOG_HEIGHT),
-			new Dimensions(level1[4], DIALOG_WIDTH, DIALOG_HEIGHT),
+			new Dimensions(level1[4], DIALOG_WIDTH, DIALOG_HEIGHT - 100),
 			new Dimensions(new Vector2(8 * TOOLBAR_BUTTON_SIZE + 9 * TOOLBAR_BUTTON_PADDING, 0),
 					TOOLBAR_BUTTON_SIZE, TOOLBAR_BUTTON_SIZE),
 			new Dimensions(level1[6], DIALOG_WIDTH, DIALOG_HEIGHT),
@@ -61,5 +63,15 @@ public final class TutorialDialogCoords {
 			new Dimensions(level1[13], DIALOG_WIDTH, DIALOG_HEIGHT),
 			new Dimensions(new Vector2(TOOLBAR_BUTTON_PADDING, 0), TOOLBAR_BUTTON_SIZE,
 					TOOLBAR_BUTTON_SIZE),
+	};
+
+	public static final Dimensions[] level2Triggers = {
+			new Dimensions(level2[0], DIALOG_WIDTH, DIALOG_HEIGHT),
+			new Dimensions(level2[1], DIALOG_WIDTH, DIALOG_HEIGHT),
+			new Dimensions(level2[2], DIALOG_WIDTH, DIALOG_HEIGHT)
+	};
+
+	public static final Dimensions[][] levelTriggers = {
+			level1Triggers, level2Triggers
 	};
 }

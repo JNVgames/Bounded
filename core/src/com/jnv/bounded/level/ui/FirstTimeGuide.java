@@ -24,7 +24,9 @@ public class FirstTimeGuide {
 	private List<Actor> triggerMasks;
 	private Image skipLevelButton;
 	private static final int[] numTextures = {
-			15, 0, 0, 0, 0, 0, 0, 0
+			TutorialDialogCoords.allCoords[0].length,
+			TutorialDialogCoords.allCoords[1].length,
+			0, 0, 0, 0, 0, 0
 	};
 
 	public FirstTimeGuide(final int level, GameStateManager gsm, final LevelState levelState) {
@@ -47,12 +49,13 @@ public class FirstTimeGuide {
 		levelHelpers = new ArrayList<Image>();
 		triggerMasks = new ArrayList<Actor>();
 		for (int i = 0; i < numTextures[level - 1]; i++) {
-			levelHelperMasks.add(new Image(res.getTexture("helper-level1-mask" + (i + 1))));
-			levelHelpers.add(new Image(res.getTexture("helper-level1-" + (i + 1))));
+			levelHelperMasks.add(new Image(res.getTexture("helper-level" + level + "-mask"
+					+ (i + 1))));
+			levelHelpers.add(new Image(res.getTexture("helper-level" + level + "-" + (i + 1))));
 			levelHelpers.get(i).setX(TutorialDialogCoords.allCoords[level - 1][i].x);
 			levelHelpers.get(i).setY(TutorialDialogCoords.allCoords[level - 1][i].y);
 			triggerMasks.add(new Actor());
-			triggerMasks.get(i).setBounds(TutorialDialogCoords.level1Triggers[i]);
+			triggerMasks.get(i).setBounds(TutorialDialogCoords.levelTriggers[level - 1][i]);
 			addAppropriateListener(level, i);
 		}
 	}
@@ -62,8 +65,8 @@ public class FirstTimeGuide {
 			allActors.addActor(levelHelperMasks.get(0));
 			allActors.addActor(levelHelpers.get(0));
 			allActors.addActor(triggerMasks.get(0));
+			allActors.addActor(skipLevelButton);
 		}
-		allActors.addActor(skipLevelButton);
 		stage.addActor(allActors);
 	}
 
