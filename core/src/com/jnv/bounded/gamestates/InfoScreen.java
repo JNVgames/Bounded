@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.scene2d.InputListener;
 
 public class InfoScreen extends GameState {
 

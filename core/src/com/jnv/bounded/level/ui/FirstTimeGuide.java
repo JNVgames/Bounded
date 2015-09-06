@@ -1,10 +1,11 @@
 package com.jnv.bounded.level.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.resources.BoundedAssetManager;
+import com.jnv.bounded.scene2d.InputListener;
 import com.jnv.bounded.utilities.TutorialDialogCoords;
 
 import java.util.ArrayList;
@@ -13,9 +14,9 @@ import java.util.List;
 public class FirstTimeGuide {
 
 	private Stage stage;
-	private BoundedAssetManager res;
 	private List<Image> levelHelperMasks;
 	private List<Image> levelHelpers;
+	private List<Actor> triggerMasks;
 	private Image endTexture;
 	private static final int[] numTextures = {
 			15, 1, 1, 1, 1, 1, 1, 1
@@ -23,9 +24,10 @@ public class FirstTimeGuide {
 
 	public FirstTimeGuide(final int level, GameStateManager gsm) {
 		stage = gsm.game().getStage();
-		res = gsm.game().res;
+		BoundedAssetManager res = gsm.game().res;
 		levelHelperMasks = new ArrayList<Image>();
 		levelHelpers = new ArrayList<Image>();
+		triggerMasks = new ArrayList<Actor>();
 		for (int i = 0; i < numTextures[level - 1]; i++) {
 			levelHelperMasks.add(new Image(res.getTexture("helper-level1-mask" + (i + 1))));
 			levelHelpers.add(new Image(res.getTexture("helper-level1-" + (i + 1))));
@@ -33,6 +35,9 @@ public class FirstTimeGuide {
 			levelHelpers.get(i).setY(TutorialDialogCoords.level1[i].y);
 			addAppropriateListener(i, level);
 		}
+	}
+
+	public void addToStage() {
 		stage.addActor(levelHelperMasks.get(0));
 		stage.addActor(levelHelpers.get(0));
 	}

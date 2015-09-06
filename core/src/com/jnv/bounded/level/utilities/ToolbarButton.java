@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.scene2d.InputListener;
 
 public class ToolbarButton extends Actor {
 

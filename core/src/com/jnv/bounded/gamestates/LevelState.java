@@ -73,6 +73,7 @@ public class LevelState extends GameState {
 		loadCamsAndHUD();
 		setBackground();
 		loadFont();
+		firstTimeGuide.addToStage();
 	}
 
 	public void update(float dt) {

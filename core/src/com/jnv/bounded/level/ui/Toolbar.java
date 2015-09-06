@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.bounded.gamestates.LevelState;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.level.utilities.ToolbarButton;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.resources.BoundedAssetManager;
+import com.jnv.bounded.scene2d.InputListener;
 
 import java.util.ArrayList;
 import java.util.List;

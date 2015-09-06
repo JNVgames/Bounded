@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.scene2d.InputListener;
 
 public class MenuState extends GameState {
 

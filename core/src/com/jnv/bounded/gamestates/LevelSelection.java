@@ -13,8 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
 import com.jnv.bounded.inputprocessors.BoundedInput;
-import com.jnv.bounded.inputprocessors.InputListener;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.scene2d.InputListener;
 
 public class LevelSelection extends GameState {
 
