@@ -27,7 +27,10 @@ public class FirstTimeGuide {
 			TutorialDialogCoords.allCoords[0].length,
 			TutorialDialogCoords.allCoords[1].length,
 			TutorialDialogCoords.allCoords[2].length,
-			0, 0, 0, 0, 0
+			TutorialDialogCoords.allCoords[3].length,
+			TutorialDialogCoords.allCoords[4].length,
+			TutorialDialogCoords.allCoords[5].length,
+			0, 0
 	};
 
 	public FirstTimeGuide(final int level, GameStateManager gsm, final LevelState levelState) {

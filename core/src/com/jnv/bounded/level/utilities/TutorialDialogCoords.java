@@ -45,8 +45,20 @@ public final class TutorialDialogCoords {
 			new Vector2(0, Bounded.HEIGHT - 472)
 	};
 
+	public static final Vector2[] level4 = {
+			new Vector2(465 - DIALOG_HALF_WIDTH, Bounded.HEIGHT - 530),
+	};
+
+	public static final Vector2[] level5 = {
+			new Vector2(817 - DIALOG_HALF_WIDTH, 0)
+	};
+
+	public static final Vector2[] level6 = {
+			new Vector2(80, Bounded.HEIGHT / 2 - DIALOG_HALF_HEIGHT)
+	};
+
 	public static final Vector2[][] allCoords = {
-			level1, level2, level3
+			level1, level2, level3, level4, level5, level6
 	};
 
 	public static final Dimensions[] level1Triggers = {
@@ -79,7 +91,20 @@ public final class TutorialDialogCoords {
 			new Dimensions(level3[0], DIALOG_WIDTH, DIALOG_HEIGHT)
 	};
 
+	public static final Dimensions[] level4Triggers = {
+			new Dimensions(level4[0], DIALOG_WIDTH, DIALOG_HEIGHT)
+	};
+
+	public static final Dimensions[] level5Triggers =  {
+			new Dimensions(level5[0], DIALOG_WIDTH, DIALOG_HEIGHT)
+	};
+
+	public static final Dimensions[] level6Triggers =  {
+			new Dimensions(level6[0], DIALOG_WIDTH, DIALOG_HEIGHT)
+	};
+
 	public static final Dimensions[][] levelTriggers = {
-			level1Triggers, level2Triggers, level3Triggers
+			level1Triggers, level2Triggers, level3Triggers, level4Triggers, level5Triggers,
+			level6Triggers
 	};
 }

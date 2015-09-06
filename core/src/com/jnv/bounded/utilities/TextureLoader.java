@@ -56,9 +56,14 @@ public class TextureLoader {
 			bounded.res.loadTexture("helpers/level1/level2/mask" + i + ".png",
 					"helper-level2-mask" + i);
 		}
-		bounded.res.loadTexture("helpers/level1/level3/" + 1 + ".png", "helper-level3-" + 1);
-		bounded.res.loadTexture("helpers/level1/level3/mask" + 1 + ".png",
-				"helper-level3-mask" + 1);
+		bounded.res.loadTexture("helpers/level1/level3/1.png", "helper-level3-1");
+		bounded.res.loadTexture("helpers/level1/level3/mask1.png", "helper-level3-mask1");
+		bounded.res.loadTexture("helpers/level1/level4/1.png", "helper-level4-1");
+		bounded.res.loadTexture("helpers/level1/level4/mask1.png", "helper-level4-mask1");
+		bounded.res.loadTexture("helpers/level1/level5/1.png", "helper-level5-1");
+		bounded.res.loadTexture("helpers/level1/level5/mask1.png", "helper-level5-mask1");
+		bounded.res.loadTexture("helpers/level1/level6/1.png", "helper-level6-1");
+		bounded.res.loadTexture("helpers/level1/level6/mask1.png", "helper-level6-mask1");
 		bounded.res.loadTexture("helpers/mask.png", "screen_mask");
 		bounded.res.loadTexture("helpers/skip_level_button.png", "skip_level");
 	}

@@ -31,6 +31,9 @@ public class Dimensions {
 	}
 
 	// Getters
+	public Vector2 getCoords() {
+		return new Vector2(getX(), getY());
+	}
 	public float getX() {
 		if (isCenterX) return x - width / 2;
 		else return x;
