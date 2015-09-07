@@ -5,68 +5,69 @@
 package com.jnv.bounded.level.events;
 
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.jnv.bounded.gamestates.LevelState;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.BoundedInput;
 import com.jnv.bounded.main.Bounded;
-import com.jnv.bounded.utilities.SimpleButton;
+import com.jnv.bounded.resources.BoundedAssetManager;
+import com.jnv.bounded.scene2d.InputListener;
+import com.jnv.bounded.scene2d.ui.Image;
+import com.jnv.bounded.utilities.Dimensions;
 
 public class LevelComplete {
 
-	private final String NEXT_LEVEL_BUTTON_NAME = "game_images/next_level256x144.png";
-	private final String LEVEL_SELECTION_BUTTON_NAME = "game_images/level_select_button256x144.png";
-	private BitmapFont completedLevelFont;
-	private CharSequence completedLevelString = "You have completed this level!";
-	private SimpleButton nextLevelButton;
-	private SimpleButton backToLevelSelectionButton;
-	private Texture nextLevelTexture;
-	private Texture levelSelectionTexture;
+	private Group levelCompleteGroup;
 	private GameStateManager gsm;
-	private LevelState levelState;
+	private Stage stage;
 
-	public LevelComplete(LevelState levelState) {
-		this.levelState = levelState;
+	public LevelComplete(final LevelState levelState) {
 		gsm = levelState.getGameStateManager();
+		stage = gsm.game().getStage();
+		BoundedAssetManager res = gsm.game().res;
+		levelCompleteGroup = new Group();
 
-		completedLevelFont = new BitmapFont();
-		completedLevelFont.setColor(Color.RED);
-		completedLevelFont.getData().scale(2f);
+		Image opacityMask = new Image(res.getTexture("opacity_mask"));
+		opacityMask.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
+		levelCompleteGroup.addActor(opacityMask);
 
-		levelSelectionTexture = new Texture(LEVEL_SELECTION_BUTTON_NAME);
-		backToLevelSelectionButton = new SimpleButton(levelSelectionTexture,
-				Bounded.WIDTH / 4, 100,
-				Bounded.WIDTH / 5, Bounded.HEIGHT / 5);
+		Image levelCompleteWindow = new Image(res.getTexture("level_complete_window"));
+		levelCompleteWindow.setBounds(new Dimensions(Bounded.WIDTH / 2, Bounded.HEIGHT / 2, 800,
+				400, true, true));
+		levelCompleteGroup.addActor(levelCompleteWindow);
 
-		nextLevelTexture = new Texture(NEXT_LEVEL_BUTTON_NAME);
-		nextLevelButton = new SimpleButton(nextLevelTexture, 2 * Bounded.WIDTH / 4,
-				100, Bounded.WIDTH / 5, Bounded.HEIGHT / 5);
-	}
+		Image levelSelection = new Image(res.getTexture("level_select_button"));
+		levelSelection.setBounds(240 + 96, levelCompleteWindow.getY() + 30, Bounded.WIDTH / 5,
+				Bounded.HEIGHT / 5);
+		levelSelection.addListener(new InputListener(levelSelection) {
+			@Override
+			public void doAction() {
+				gsm.setState(GameStateManager.State.LEVELSELECTION);
+			}
+		});
+		levelCompleteGroup.addActor(levelSelection);
 
-	public void handleInput() {
-		if (BoundedInput.isReleased()) {
-			if (nextLevelButton.checkIfClicked(BoundedInput.x, BoundedInput.y)) {
+		Image nextLevelButton = new Image(res.getTexture("next_level"));
+		nextLevelButton.setBounds(688, levelSelection.getY(), Bounded.WIDTH / 5, Bounded.HEIGHT / 5);
+		nextLevelButton.addListener(new InputListener(nextLevelButton) {
+			@Override
+			public void doAction() {
 				LevelState.setNextLevel();
 				LevelState.setMaxDistance();
 				levelState.getLevelEventsHandler().unlockLevel();
 				gsm.setState(GameStateManager.State.LEVELSTATE);
-			} else if (backToLevelSelectionButton.checkIfClicked(BoundedInput.x, BoundedInput.y)) {
-				gsm.setState(GameStateManager.State.LEVELSELECTION);
 			}
-		}
+		});
+		levelCompleteGroup.addActor(nextLevelButton);
+
+		stage.addActor(levelCompleteGroup);
+		levelCompleteGroup.setVisible(false);
+		levelCompleteGroup.setTouchable(Touchable.disabled);
 	}
 
-	public void render(SpriteBatch sb) {
-
-		sb.draw(gsm.game().res.getTexture("opacity_mask"), 0, 0,
-				Bounded.WIDTH, Bounded.HEIGHT);
-		completedLevelFont.draw(sb, completedLevelString,
-				Bounded.WIDTH / 4, Bounded.HEIGHT / 2);
-
-		nextLevelButton.draw(sb);
-		backToLevelSelectionButton.draw(sb);
+	public void setVisible() {
+		levelCompleteGroup.setVisible(true);
+		levelCompleteGroup.setTouchable(Touchable.enabled);
 	}
 }

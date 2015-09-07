@@ -5,14 +5,10 @@
 package com.jnv.bounded.gamestates;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.bounded.handlers.GameStateManager;
-import com.jnv.bounded.inputprocessors.BoundedGestureProcessor;
-import com.jnv.bounded.inputprocessors.BoundedInput;
 import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.scene2d.InputListener;
 
@@ -25,28 +21,15 @@ public class LevelSelection extends GameState {
 
 	public LevelSelection(GameStateManager gsm) {
 		super(gsm);
-
-		InputMultiplexer im = new InputMultiplexer();
-		im.addProcessor(new GestureDetector(new BoundedGestureProcessor()));
-		im.addProcessor(stage);
-		Gdx.input.setInputProcessor(im);
-
 		loadStage();
 	}
 
 	public void update(float dt) {
-		handleInput();
 		stage.act(dt);
 	}
 
 	public void handleInput() {
-		if (BoundedInput.leftFling) {
-			setNextScreen();
-		}
 
-		if (BoundedInput.rightFling) {
-			setPreviousScreen();
-		}
 	}
 
 	public void render() {
@@ -91,7 +74,7 @@ public class LevelSelection extends GameState {
 		});
 		Image levelSelectText = new Image(game.res.getTexture("level select"));
 		levelSelectText.layout();
-		levelSelectText.setBounds((Bounded.WIDTH - 612) / 2, Bounded.HEIGHT - 200, 612, 144);
+		levelSelectText.setBounds((Bounded.WIDTH - 612) / 2, Bounded.HEIGHT - 170, 612, 144);
 		stage.addActor(levelSelectText);
 	}
 

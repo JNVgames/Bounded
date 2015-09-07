@@ -98,6 +98,9 @@ public class TextureLoader {
 	}
 
 	private void loadHUDButtons() {
+		bounded.res.loadTexture("game_images/level_complete800x400.png", "level_complete_window");
+		bounded.res.loadTexture("game_images/next_level256x144.png", "next_level");
+		bounded.res.loadTexture("game_images/level_select_button256x144.png", "level_select_button");
 		bounded.res.loadTexture("game_images/black_toolbar150x150.png", "toolbar");
 		bounded.res.loadTexture("game_images/play_button150x150.png", "play");
 		bounded.res.loadTexture("game_images/play_button_pressed150x150.png", "play_pressed");
@@ -168,6 +171,7 @@ public class TextureLoader {
 		bounded.res.loadTexture("game_images/levels/info_button100x100.png", "info button");
 		bounded.res.loadTexture("game_images/circle_x150x150.png", "x");
 		bounded.res.loadTexture("game_images/level_screen_text612x144.png", "level select");
+		bounded.res.loadTexture("game_images/blue_background800x400.png", "options_background");
 
 		int amountOfLevelButtons = 40;
 

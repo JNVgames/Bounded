@@ -26,7 +26,7 @@ public class Bounded extends Game {
 
 	public final static int WIDTH = 1280;
 	public final static int HEIGHT = 720;
-	public static boolean debug = true;
+	public static boolean debug = false;
 	public static List<Boolean> lockedLevels;
 	private static boolean gamePaused = false;
 	private static FreeTypeFontGenerator generator;

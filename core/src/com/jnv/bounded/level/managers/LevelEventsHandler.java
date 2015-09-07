@@ -52,6 +52,7 @@ public class LevelEventsHandler {
 		this.levelState = levelState;
 		cl = levelState.getBoundedContactListener();
 		whm = levelState.getWallsHistoryManager();
+		levelComplete = new LevelComplete(levelState);
 
 		allArrows = new ArrayList<Arrow>();
 		allBlackHoles = new ArrayList<BlackHole>();
@@ -81,7 +82,6 @@ public class LevelEventsHandler {
 		portalUpdate(dt);
 		teleporterUpdate();
 		laserUpdate();
-		levelCompleteUpdate();
 	}
 
 	public void render(SpriteBatch sb) {
@@ -126,8 +126,8 @@ public class LevelEventsHandler {
 			ball.setErased();
 		}
 		unlockLevel();
-		if (levelComplete == null) {
-			levelComplete = new LevelComplete(levelState);
+		if (levelCompleted) {
+			levelComplete.setVisible();
 		}
 	}
 
@@ -162,12 +162,6 @@ public class LevelEventsHandler {
 		}
 		if (cl.isTouchingBlackHoleCenter()) {
 			levelState.resetBall();
-		}
-	}
-
-	private void levelCompleteUpdate() {
-		if (levelComplete != null) {
-			levelComplete.handleInput();
 		}
 	}
 
@@ -282,12 +276,6 @@ public class LevelEventsHandler {
 	private void keyRender(SpriteBatch sb) {
 		if (key != null) {
 			key.render(sb);
-		}
-	}
-
-	public void levelCompleteRender(SpriteBatch sb) {
-		if (levelComplete != null) {
-			levelComplete.render(sb);
 		}
 	}
 

@@ -243,19 +243,23 @@ public class Toolbar {
 		};
 		final Image returnButton = new Image(res.getTexture("return"));
 
+		final Image optionsBackground = new Image(res.getTexture("options_background"));
+		optionsBackground.setBounds(Bounded.WIDTH / 2 - 400, Bounded.HEIGHT / 2 - 200, 800, 400);
+
 		mask.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
 		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				mask.remove();
 				returnButton.remove();
+				optionsBackground.remove();
 				levelState.setEditState(levelState.getCacheState());
 			}
 		});
 
 		returnButton.layout();
 		returnButton.setBounds(((Bounded.WIDTH / 2) - (res.getTexture("return").getWidth() / 2)),
-				Bounded.HEIGHT * 3 / 5, 612, 144);
+				Bounded.HEIGHT * 3 / 5 - 80, 612, 144);
 		returnButton.addListener(new InputListener(returnButton) {
 			@Override
 			public void doAction() {
@@ -264,6 +268,7 @@ public class Toolbar {
 		});
 
 		stage.addActor(mask);
+		stage.addActor(optionsBackground);
 		stage.addActor(returnButton);
 	}
 

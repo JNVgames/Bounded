@@ -222,8 +222,6 @@ public class LevelState extends GameState {
 		distanceFont.draw(sb, "Level " + level + ", " + "Distance: " +
 				format.format(whm.getTotalDistance()) + " / " +
 				format.format(maxDistance), 20, Bounded.HEIGHT - 20);
-
-		leh.levelCompleteRender(sb);
 		sb.end();
 	}
 
