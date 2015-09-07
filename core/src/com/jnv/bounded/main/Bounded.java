@@ -26,7 +26,7 @@ public class Bounded extends Game {
 
 	public final static int WIDTH = 1280;
 	public final static int HEIGHT = 720;
-	public static boolean debug = true;
+	public static boolean debug = false;
 	public static List<Boolean> lockedLevels;
 	private static boolean gamePaused = false;
 	private static FreeTypeFontGenerator generator;
@@ -93,7 +93,7 @@ public class Bounded extends Game {
 		stretchViewport = new StretchViewport(WIDTH, HEIGHT, camera);
 		stretchViewport.setScreenSize(WIDTH, HEIGHT);
 		stretchViewport.apply();
-		stage = new Stage(stretchViewport);
+		stage = new Stage(stretchViewport, sb);
 		camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 		res = new BoundedAssetManager();

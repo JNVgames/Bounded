@@ -43,6 +43,9 @@ public class LevelComplete {
 		levelSelection.addListener(new InputListener(levelSelection) {
 			@Override
 			public void doAction() {
+				LevelState.setNextLevel();
+				LevelState.setMaxDistance();
+				levelState.getLevelEventsHandler().unlockLevel();
 				gsm.setState(GameStateManager.State.LEVELSELECTION);
 			}
 		});

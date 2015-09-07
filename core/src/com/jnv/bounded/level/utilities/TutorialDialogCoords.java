@@ -63,7 +63,8 @@ public final class TutorialDialogCoords {
 	};
 
 	public static final Vector2[] level8 = {
-			new Vector2(777 - DIALOG_HALF_WIDTH, Bounded.HEIGHT - 548)
+			new Vector2(Bounded.WIDTH / 2 - DIALOG_HALF_WIDTH,
+					Bounded.HEIGHT / 2 - DIALOG_HALF_HEIGHT)
 	};
 
 	public static final Vector2[][] allCoords = {

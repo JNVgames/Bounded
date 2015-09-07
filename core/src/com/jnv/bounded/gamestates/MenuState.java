@@ -25,8 +25,8 @@ public class MenuState extends GameState {
 		cam.setToOrtho(false, Bounded.WIDTH, Bounded.HEIGHT);
 		stretchViewport.setScreenPosition(0, 0);
 
-		Label label = new Label("Tap anywhere to begin", Bounded.getFont(30));
-		label.setBounds((Bounded.WIDTH - label.getPrefWidth()) / 2, Bounded.HEIGHT / 10,
+		Label label = new Label("Tap anywhere to begin", Bounded.getFont(40));
+		label.setBounds((Bounded.WIDTH - label.getPrefWidth()) / 2, Bounded.HEIGHT / 10 - 20,
 				label.getPrefWidth(), label.getPrefHeight());
 		label.layout();
 		stage.addActor(label);
