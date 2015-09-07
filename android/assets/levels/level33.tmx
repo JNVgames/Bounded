@@ -16,8 +16,8 @@
  <objectgroup color="#ffa0a4" name="arrow"/>
  <objectgroup color="#ff5500" name="key"/>
  <objectgroup color="#00ff00" name="wall">
-  <object id="129" x="8" y="256" width="284" height="10"/>
-  <object id="212" x="306" y="5" width="259" height="10" rotation="90"/>
+  <object id="129" x="1" y="256" width="295" height="10"/>
+  <object id="212" x="306" y="5" width="261" height="10" rotation="90"/>
   <object id="247" x="546" y="4" width="308" height="10" rotation="90"/>
   <object id="248" x="832" y="393" width="317" height="10" rotation="90"/>
  </objectgroup>
@@ -57,7 +57,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#00ffff" name="magnet">
-  <object id="217" x="148" y="402" width="125" height="125">
+  <object id="217" x="153" y="385" width="125" height="125">
    <ellipse/>
   </object>
   <object id="220" x="21" y="270" width="125" height="125">
@@ -149,11 +149,11 @@
   </object>
  </objectgroup>
  <objectgroup color="#0000ff" name="laser">
-  <object id="142" x="16" y="277" width="171.12" height="9" rotation="30"/>
+  <object id="142" x="16" y="269" width="171.12" height="9" rotation="30"/>
   <object id="146" x="120" y="467" width="176.82" height="9" rotation="-5"/>
-  <object id="160" x="306" y="266" width="451" height="10" rotation="90"/>
+  <object id="160" x="306" y="267" width="450" height="10" rotation="90"/>
   <object id="214" x="5" y="566" width="146.926" height="9" rotation="5"/>
   <object id="215" x="7" y="708" width="283.82" height="9"/>
-  <object id="216" x="16" y="268" width="444" height="9" rotation="90"/>
+  <object id="216" x="11" y="267" width="444" height="9" rotation="90"/>
  </objectgroup>
 </map>

@@ -9,13 +9,13 @@
   <object id="124" x="1160" y="667" width="80" height="20"/>
  </objectgroup>
  <objectgroup color="#ffa0a4" name="arrow">
-  <object id="120" x="62" y="33" width="120" height="40"/>
-  <object id="143" x="58" y="294" width="120" height="40"/>
-  <object id="145" x="267" y="703" width="120" height="40" rotation="270"/>
-  <object id="147" x="259" y="393" width="120" height="40" rotation="270"/>
-  <object id="148" x="101" y="232" width="120" height="40" rotation="270"/>
-  <object id="149" x="91" y="510" width="120" height="40" rotation="270"/>
-  <object id="151" x="349" y="501" width="120" height="40" rotation="180"/>
+  <object id="120" x="57" y="31" width="120" height="40"/>
+  <object id="143" x="57" y="299" width="120" height="40"/>
+  <object id="145" x="261" y="703" width="120" height="40" rotation="270"/>
+  <object id="147" x="261" y="385" width="120" height="40" rotation="270"/>
+  <object id="148" x="87" y="236" width="120" height="40" rotation="270"/>
+  <object id="149" x="87" y="528" width="120" height="40" rotation="270"/>
+  <object id="151" x="343" y="501" width="120" height="40" rotation="180"/>
   <object id="154" x="343" y="196" width="120" height="40" rotation="180"/>
  </objectgroup>
  <objectgroup color="#ff5500" name="key">

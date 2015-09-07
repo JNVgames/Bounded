@@ -19,7 +19,7 @@
   <object id="52" x="45" y="386" width="30" height="60"/>
  </objectgroup>
  <objectgroup color="#00ff00" name="wall">
-  <object id="128" x="948" y="736" width="200" height="10" rotation="-30">
+  <object id="128" x="732.068" y="721.041" width="240.548" height="10" rotation="-10">
    <properties>
     <property name="range" value="300"/>
    </properties>
@@ -40,7 +40,7 @@
  <objectgroup color="#00ffff" name="magnet"/>
  <objectgroup color="#ffff00" name="teleporter"/>
  <objectgroup name="fan">
-  <object id="75" x="1124" y="713" width="50" height="150" rotation="270">
+  <object id="75" x="976" y="723" width="50" height="150" rotation="270">
    <properties>
     <property name="range" value="300"/>
    </properties>
@@ -50,7 +50,7 @@
     <property name="range" value="300"/>
    </properties>
   </object>
-  <object id="130" x="1280" y="441" width="50" height="150" rotation="180">
+  <object id="130" x="1274" y="157" width="50" height="150" rotation="90">
    <properties>
     <property name="range" value="300"/>
    </properties>

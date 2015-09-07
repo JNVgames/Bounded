@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="105">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="106">
  <objectgroup color="#ff0101" name="ball">
   <object id="98" x="18" y="21" width="50" height="50">
    <ellipse/>
@@ -42,9 +42,9 @@
   <object id="77" x="629" y="0" width="720" height="10" rotation="90"/>
  </objectgroup>
  <objectgroup color="#ff55ff" name="gumcloud">
-  <object id="78" x="677" y="7" width="599" height="141"/>
-  <object id="80" x="675" y="583" width="600" height="128"/>
-  <object id="83" x="673" y="158" width="598" height="115"/>
+  <object id="78" x="673" y="7" width="600" height="140"/>
+  <object id="80" x="675" y="583" width="600" height="140"/>
+  <object id="83" x="673" y="158" width="600" height="140"/>
  </objectgroup>
  <objectgroup color="#55007f" name="blackhole">
   <object id="88" x="634" y="389" width="350" height="350">
@@ -67,7 +67,8 @@
   </object>
  </objectgroup>
  <objectgroup name="fan">
-  <object id="97" x="9" y="328" width="300" height="150"/>
+  <object id="97" x="9" y="328" width="50" height="150"/>
+  <object id="105" x="9" y="99" width="50" height="150"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="Boundary">
   <object id="17" x="1" y="-1">

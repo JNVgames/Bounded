@@ -11,9 +11,9 @@
  <objectgroup color="#ffa0a4" name="arrow"/>
  <objectgroup color="#ff5500" name="key"/>
  <objectgroup color="#00ff00" name="wall">
-  <object id="112" x="244" y="507" width="211" height="10" rotation="90"/>
-  <object id="113" x="633" y="5" width="211" height="10" rotation="90"/>
-  <object id="114" x="1007" y="507" width="211" height="10" rotation="90"/>
+  <object id="112" x="228" y="509" width="211" height="10" rotation="90"/>
+  <object id="113" x="637" y="11" width="211" height="10" rotation="90"/>
+  <object id="114" x="1019" y="513" width="211" height="10" rotation="90"/>
  </objectgroup>
  <objectgroup color="#ff55ff" name="gumcloud"/>
  <objectgroup color="#55007f" name="blackhole">
@@ -25,10 +25,10 @@
   </object>
  </objectgroup>
  <objectgroup color="#00ffff" name="magnet">
-  <object id="102" x="34" y="278" width="425" height="425">
+  <object id="102" x="16" y="278" width="425" height="425">
    <ellipse/>
   </object>
-  <object id="111" x="790" y="278" width="425" height="425">
+  <object id="111" x="796" y="278" width="425" height="425">
    <ellipse/>
   </object>
  </objectgroup>

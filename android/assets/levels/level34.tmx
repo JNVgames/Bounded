@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="181">
  <objectgroup color="#ff0101" name="ball">
-  <object id="47" x="166" y="14" width="50" height="50">
+  <object id="47" x="165" y="17" width="50" height="50">
    <ellipse/>
   </object>
  </objectgroup>

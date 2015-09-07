@@ -14,7 +14,6 @@
   <object id="114" x="1050" y="300" width="120" height="40" rotation="180"/>
   <object id="115" x="1050" y="460" width="120" height="40" rotation="180"/>
   <object id="116" x="1050" y="380" width="120" height="40" rotation="180"/>
-  <object id="122" x="1050" y="220" width="120" height="40" rotation="180"/>
   <object id="124" x="1050" y="620" width="120" height="40" rotation="180"/>
  </objectgroup>
  <objectgroup color="#ff5500" name="key">
@@ -22,8 +21,8 @@
  </objectgroup>
  <objectgroup color="#00ff00" name="wall"/>
  <objectgroup color="#ff55ff" name="gumcloud">
-  <object id="119" x="382" y="502" width="283" height="65"/>
-  <object id="121" x="466" y="40" width="338" height="91"/>
+  <object id="119" x="444" y="500" width="338" height="91"/>
+  <object id="121" x="444" y="28" width="338" height="91"/>
  </objectgroup>
  <objectgroup color="#55007f" name="blackhole"/>
  <objectgroup color="#00ffff" name="magnet"/>
@@ -54,6 +53,6 @@
   <object id="97" x="26" y="10" width="300" height="10" rotation="90"/>
   <object id="104" x="436" y="11" width="300" height="10" rotation="90"/>
   <object id="105" x="26" y="311" width="300" height="10" rotation="90"/>
-  <object id="106" x="436" y="315" width="180" height="10" rotation="90"/>
+  <object id="106" x="436" y="311" width="184" height="10" rotation="90"/>
  </objectgroup>
 </map>

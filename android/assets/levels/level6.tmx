@@ -6,7 +6,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff0000" name="portal">
-  <object id="49" x="1124" y="666" width="80" height="20"/>
+  <object id="49" x="1118" y="682" width="80" height="20"/>
  </objectgroup>
  <objectgroup color="#ffa0a4" name="arrow">
   <object id="51" x="23" y="39" width="120" height="40">
@@ -17,9 +17,9 @@
  </objectgroup>
  <objectgroup color="#ff5500" name="key"/>
  <objectgroup color="#00ff00" name="wall">
-  <object id="54" x="1033" y="467" width="246" height="10"/>
-  <object id="102" x="1031" y="264" width="450" height="10" rotation="90"/>
-  <object id="112" x="1034" y="265" width="246" height="10"/>
+  <object id="54" x="1031" y="467" width="248" height="10"/>
+  <object id="102" x="1031" y="265" width="449" height="10" rotation="90"/>
+  <object id="112" x="1031" y="265" width="249" height="10"/>
   <object id="115" x="0" y="113" width="1280" height="10"/>
  </objectgroup>
  <objectgroup color="#ff55ff" name="gumcloud"/>
@@ -50,7 +50,7 @@
     <property name="tpNum" value="7"/>
    </properties>
   </object>
-  <object id="123" x="1275" y="239" width="20" height="80" rotation="180">
+  <object id="123" x="1261" y="238" width="20" height="80" rotation="180">
    <properties>
     <property name="target" value="1"/>
     <property name="tpNum" value="2"/>

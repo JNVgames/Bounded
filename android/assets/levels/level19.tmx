@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="182">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1280" height="720" tilewidth="1" tileheight="1" nextobjectid="183">
  <objectgroup color="#ff0101" name="ball">
   <object id="119" x="71" y="19" width="50" height="50">
    <ellipse/>
@@ -8,10 +8,16 @@
  <objectgroup color="#ff0000" name="portal">
   <object id="140" x="1259" y="22" width="80" height="20" rotation="90"/>
  </objectgroup>
- <objectgroup color="#ffa0a4" name="arrow"/>
+ <objectgroup color="#ffa0a4" name="arrow">
+  <object id="182" x="179" y="440" width="150" height="40">
+   <properties>
+    <property name="impulseLevel" value="8"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#ff5500" name="key"/>
  <objectgroup color="#00ff00" name="wall">
-  <object id="131" x="144" y="11" width="548" height="10" rotation="90"/>
+  <object id="131" x="144" y="-1" width="560" height="10" rotation="90"/>
   <object id="179" x="1052" y="115" width="228" height="10"/>
   <object id="180" x="133" y="559" width="741" height="10"/>
  </objectgroup>

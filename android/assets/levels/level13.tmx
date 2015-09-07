@@ -41,6 +41,6 @@
   </object>
  </objectgroup>
  <objectgroup color="#0000ff" name="laser">
-  <object id="97" x="602" y="14" width="442" height="10" rotation="90"/>
+  <object id="97" x="602" y="0" width="456" height="10" rotation="90"/>
  </objectgroup>
 </map>

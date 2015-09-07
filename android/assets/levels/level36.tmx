@@ -76,7 +76,7 @@
  <objectgroup color="#0000ff" name="laser">
   <object id="97" x="4" y="342" width="300" height="10"/>
   <object id="106" x="307" y="342" width="300" height="10"/>
-  <object id="107" x="610" y="342" width="300" height="10"/>
+  <object id="107" x="610" y="342" width="330" height="10"/>
   <object id="112" x="4" y="7" width="300" height="10"/>
   <object id="113" x="307" y="7" width="300" height="10"/>
   <object id="114" x="613" y="7" width="300" height="10"/>

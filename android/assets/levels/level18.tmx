@@ -37,9 +37,9 @@
  <objectgroup color="#00ffff" name="magnet"/>
  <objectgroup color="#ffff00" name="teleporter"/>
  <objectgroup name="fan">
-  <object id="78" x="654" y="714" width="50" height="150" rotation="270"/>
+  <object id="78" x="654" y="717" width="50" height="150" rotation="270"/>
   <object id="79" x="881" y="717" width="50" height="150" rotation="270"/>
-  <object id="80" x="1130" y="720" width="50" height="150" rotation="270"/>
+  <object id="80" x="1130" y="717" width="50" height="150" rotation="270"/>
   <object id="81" x="355" y="335" width="50" height="150"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="Boundary">
