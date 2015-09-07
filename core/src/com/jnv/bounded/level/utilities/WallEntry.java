@@ -11,13 +11,19 @@ import java.util.List;
 
 public class WallEntry {
 
+	public enum Action {
+		DRAW,
+		ERASE,
+		CLEAR
+	}
+
 	private List<UserWall> walls;
-	private String action;
+	private Action action;
 
 	// Size of points and distance arrays
 	private int size;
 
-	public WallEntry(String action) {
+	public WallEntry(Action action) {
 
 		walls = new ArrayList<UserWall>();
 		this.action = action;
@@ -34,7 +40,7 @@ public class WallEntry {
 		return walls;
 	}
 
-	public String getAction() {
+	public Action getAction() {
 		return action;
 	}
 

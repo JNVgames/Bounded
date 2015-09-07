@@ -123,17 +123,18 @@ public class WallsHistoryManager {
 		return totalDist;
 	}
 
-	private void setErase(Body body) {
+	private UserWall setErase(Body body) {
 		for (WallEntry wallEntry : wallEntries) {
-			if (wallEntry.getAction().equals("draw")) {
+			if (wallEntry.getAction() == WallEntry.Action.DRAW) {
 				for (UserWall wall : wallEntry.getWalls()) {
 					if (wall.getBody() == body && wall.isDrawn()) {
-						eraseEntry.addWall(wall);
 						wall.setErased();
+						return wall;
 					}
 				}
 			}
 		}
+		return null;
 	}
 
 	// Getters
@@ -148,13 +149,9 @@ public class WallsHistoryManager {
 
 	// Setters
 	public void draw() {
-
 		if (getTotalDistance() <= maxDistance) {
-
 			if (BoundedInput.isTapped()) {
-
 				canStore = false;
-
 				tmpDistance = new ArrayList<Float>();
 				tmpPoints = new ArrayList<Float>();
 				tmpArrayOfPoints = new ArrayList<List<Float>>();
@@ -173,7 +170,6 @@ public class WallsHistoryManager {
 					tmpPoints.add(x);
 					tmpPoints.add(y);
 				}
-
 			}
 
 			if (BoundedInput.isDragged()) {
@@ -191,9 +187,7 @@ public class WallsHistoryManager {
 
 				// If user drawing comes in contact with the ball, stop
 				if (!(tmpDistance == null || tmpPoints == null)) {
-
 					if (drawable) {
-
 						float drawDistance = distTraveled(x, y, finalX, finalY);
 
 						if (drawDistance >= Constants.USER_WALL_DIST / PPM
@@ -201,7 +195,6 @@ public class WallsHistoryManager {
 								(getTotalDistance() +
 										getPartialDistance(tmpDistance) + drawDistance)
 										<= maxDistance) {
-
 							tmpDistance.add(drawDistance);
 
 							tmpPoints.add(finalX);
@@ -215,7 +208,6 @@ public class WallsHistoryManager {
 							tmpPoints.add(finalY);
 							x = finalX;
 							y = finalY;
-
 						}
 					} else {
 						tmpPoints.clear();
@@ -227,10 +219,9 @@ public class WallsHistoryManager {
 				}
 			}
 
-
 			if (BoundedInput.isReleased()) {
 				if (canStore) {
-					WallEntry wallEntry = new WallEntry("draw");
+					WallEntry wallEntry = new WallEntry(WallEntry.Action.DRAW);
 					for (int i = 0; i < tmpArrayOfPoints.size(); i++) {
 						UserWall tmp = new UserWall(tmpArrayOfPoints.get(i), world,
 								levelState.getGameStateManager().game());
@@ -247,7 +238,7 @@ public class WallsHistoryManager {
 	public void erase() {
 		if (BoundedInput.isTapped()) {
 			canStore = false;
-			eraseEntry = new WallEntry("erase");
+			eraseEntry = new WallEntry(WallEntry.Action.ERASE);
 
 			x = BoundedInput.x -
 					(Bounded.WIDTH / 2 - levelState.getCam().position.x * PPM);
@@ -261,7 +252,7 @@ public class WallsHistoryManager {
 
 			if (hitBody != null) {
 				bodiesToRemove.push(hitBody);
-				setErase(hitBody);
+				eraseEntry.addWall(setErase(hitBody));
 				canStore = true;
 			}
 		}
@@ -279,7 +270,7 @@ public class WallsHistoryManager {
 
 			if (hitBody != null) {
 				bodiesToRemove.push(hitBody);
-				setErase(hitBody);
+				eraseEntry.addWall(setErase(hitBody));
 				canStore = true;
 			}
 		}
@@ -297,20 +288,19 @@ public class WallsHistoryManager {
 		if (!wallEntries.isEmpty()) {
 
 			// Check if action is draw or erase
-			if (wallEntries.peek().getAction().equals("draw")) {
+			if (wallEntries.peek().getAction() == WallEntry.Action.DRAW) {
 				// If it's draw, remove the walls
 				for (int i = 0; i < wallEntries.peek().size(); i++) {
 					wallEntries.peek().getWall(i).setErased();
 					removeBody(wallEntries.peek().getWall(i).getBody());
 				}
-
-			} else if (wallEntries.peek().getAction().equals("erase")) {
+			} else if (wallEntries.peek().getAction() == WallEntry.Action.ERASE) {
 				// If it's erase, create the walls
 				for (int i = 0; i < wallEntries.peek().size(); i++) {
 					allWalls.add(wallEntries.peek().getWall(i));
 					wallEntries.peek().getWall(i).createUserWall();
 				}
-			} else if (wallEntries.peek().getAction().equals("clear")) {
+			} else if (wallEntries.peek().getAction() == WallEntry.Action.CLEAR) {
 				// If it's clear, create the walls
 				for (int i = 0; i < wallEntries.peek().size(); i++) {
 					allWalls.add(wallEntries.peek().getWall(i));
@@ -325,20 +315,19 @@ public class WallsHistoryManager {
 		if (!redoEntries.isEmpty()) {
 
 			// Check if action is draw or erase
-			if (redoEntries.peek().getAction().equals("draw")) {
+			if (redoEntries.peek().getAction() == WallEntry.Action.DRAW) {
 				// If it's draw, create the walls
 				for (int i = 0; i < redoEntries.peek().size(); i++) {
 					allWalls.add(redoEntries.peek().getWall(i));
 					redoEntries.peek().getWall(i).createUserWall();
 				}
-
-			} else if (redoEntries.peek().getAction().equals("erase")) {
+			} else if (redoEntries.peek().getAction() == WallEntry.Action.ERASE) {
 				// If it's erase, remove the walls
 				for (int i = 0; i < redoEntries.peek().size(); i++) {
 					redoEntries.peek().getWall(i).setErased();
 					removeBody(redoEntries.peek().getWall(i).getBody());
 				}
-			} else if (redoEntries.peek().getAction().equals("clear")) {
+			} else if (redoEntries.peek().getAction() == WallEntry.Action.CLEAR) {
 				// If it's clear, remove the walls
 				for (int i = 0; i < redoEntries.peek().size(); i++) {
 					redoEntries.peek().getWall(i).setErased();
@@ -352,7 +341,7 @@ public class WallsHistoryManager {
 	public void clearAll() {
 		if (!allWalls.isEmpty()) {
 			// Store "clear" WallEntry in wallEntries
-			WallEntry wallEntry = new WallEntry("clear");
+			WallEntry wallEntry = new WallEntry(WallEntry.Action.CLEAR);
 
 			// Store info into wallEntry and remove all bodies
 			for (UserWall userWall : allWalls) {
@@ -360,8 +349,8 @@ public class WallsHistoryManager {
 				removeBody(userWall.getBody());
 				userWall.setErased();
 			}
-
 			wallEntries.push(wallEntry);
+			redoEntries = new Stack<WallEntry>();
 		}
 	}
 
