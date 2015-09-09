@@ -1,7 +1,7 @@
 package com.jnv.bounded.scene2d.ui;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.jnv.bounded.utilities.Dimensions;
+import com.jnv.bounded.scene2d.Dimensions;
 
 public class Image extends com.badlogic.gdx.scenes.scene2d.ui.Image {
 

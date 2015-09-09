@@ -14,7 +14,7 @@ import com.jnv.bounded.main.Bounded;
 import com.jnv.bounded.resources.BoundedAssetManager;
 import com.jnv.bounded.scene2d.InputListener;
 import com.jnv.bounded.scene2d.ui.Image;
-import com.jnv.bounded.utilities.Dimensions;
+import com.jnv.bounded.scene2d.Dimensions;
 
 public class LevelComplete {
 

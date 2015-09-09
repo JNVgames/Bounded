@@ -1,4 +1,4 @@
-package com.jnv.bounded.utilities;
+package com.jnv.bounded.scene2d;
 
 import com.badlogic.gdx.math.Vector2;
 

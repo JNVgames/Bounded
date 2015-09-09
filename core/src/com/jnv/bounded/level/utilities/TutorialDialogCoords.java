@@ -2,7 +2,7 @@ package com.jnv.bounded.level.utilities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jnv.bounded.main.Bounded;
-import com.jnv.bounded.utilities.Dimensions;
+import com.jnv.bounded.scene2d.Dimensions;
 
 import static com.jnv.bounded.level.ui.Toolbar.TOOLBAR_BUTTON_PADDING;
 import static com.jnv.bounded.level.ui.Toolbar.TOOLBAR_BUTTON_SIZE;
