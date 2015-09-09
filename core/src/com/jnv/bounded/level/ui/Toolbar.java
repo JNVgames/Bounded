@@ -254,6 +254,7 @@ public class Toolbar {
 			@Override
 			public void doAction() {
 				options.remove();
+				levelState.setEditState(levelState.getCacheState());
 			}
 		});
 
@@ -289,6 +290,7 @@ public class Toolbar {
 			@Override
 			public void doAction() {
 				options.remove();
+				levelState.setEditState(levelState.getCacheState());
 			}
 		});
 
