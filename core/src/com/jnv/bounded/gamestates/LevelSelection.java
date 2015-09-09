@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.popups.InfoScreen;
 import com.jnv.bounded.scene2d.InputListener;
 
 public class LevelSelection extends GameState {
@@ -57,7 +58,7 @@ public class LevelSelection extends GameState {
 		createImage(game.res.getTexture("info button"), 1160, 600, 100, 100, new Runnable() {
 			@Override
 			public void run() {
-				gsm.setState(GameStateManager.State.FIRSTINFOPAGE);
+				new InfoScreen(gsm).addToStage();
 			}
 		});
 		createImage(game.res.getTexture("left_arrow"), 50, 50, 100, 50, new Runnable() {

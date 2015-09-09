@@ -5,7 +5,6 @@ package com.jnv.bounded.handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.jnv.bounded.gamestates.GameState;
-import com.jnv.bounded.gamestates.InfoScreen;
 import com.jnv.bounded.gamestates.LevelSelection;
 import com.jnv.bounded.gamestates.LevelState;
 import com.jnv.bounded.gamestates.MenuState;
@@ -73,9 +72,6 @@ public class GameStateManager {
 			case LEVELSTATE:
 				return new LevelState(this);
 
-			case FIRSTINFOPAGE:
-				return new InfoScreen(this);
-
 			default:
 				Gdx.app.log("GameStateManager", "getState() returns null: ERROR");
 				return null;
@@ -96,7 +92,7 @@ public class GameStateManager {
 	}
 
 	public enum State {
-		SPLASH, MENU, LEVELSELECTION, LEVELSTATE, FIRSTINFOPAGE
+		SPLASH, MENU, LEVELSELECTION, LEVELSTATE
 	}
 
 }

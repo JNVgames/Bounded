@@ -3,6 +3,7 @@ package com.jnv.bounded.level.ui;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -10,6 +11,7 @@ import com.jnv.bounded.gamestates.LevelState;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.level.utilities.ToolbarButton;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.popups.InfoScreen;
 import com.jnv.bounded.resources.BoundedAssetManager;
 import com.jnv.bounded.scene2d.InputListener;
 
@@ -235,41 +237,68 @@ public class Toolbar {
 	}
 
 	private void drawOptions() {
-		final Actor mask = new Actor() {
+		final Group options = new Group();
+		Actor mask = new Actor() {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
 				batch.draw(res.getTexture("opacity_mask"), 0, 0, Bounded.WIDTH, Bounded.HEIGHT);
 			}
 		};
-		final Image returnButton = new Image(res.getTexture("return"));
+		Image levelSelectionButton = new Image(res.getTexture("return"));
 
-		final Image optionsBackground = new Image(res.getTexture("options_background"));
-		optionsBackground.setBounds(Bounded.WIDTH / 2 - 400, Bounded.HEIGHT / 2 - 200, 800, 400);
+		Image optionsBackground = new Image(res.getTexture("options_background"));
+		optionsBackground.setBounds(Bounded.WIDTH / 2 - 400, Bounded.HEIGHT / 2 - 650 / 2, 800, 650);
 
 		mask.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
 		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
-				mask.remove();
-				returnButton.remove();
-				optionsBackground.remove();
-				levelState.setEditState(levelState.getCacheState());
+				options.remove();
 			}
 		});
 
-		returnButton.layout();
-		returnButton.setBounds(((Bounded.WIDTH / 2) - (res.getTexture("return").getWidth() / 2)),
-				Bounded.HEIGHT * 3 / 5 - 80, 612, 144);
-		returnButton.addListener(new InputListener(returnButton) {
+		levelSelectionButton.layout();
+		levelSelectionButton.setBounds(((Bounded.WIDTH / 2) - (res.getTexture("return").getWidth() / 2)),
+				optionsBackground.getY() + optionsBackground.getHeight() - 60 - levelSelectionButton.getPrefHeight(),
+				612, 144);
+		levelSelectionButton.addListener(new InputListener(levelSelectionButton, true) {
 			@Override
 			public void doAction() {
 				levelState.getGameStateManager().setState(GameStateManager.State.LEVELSELECTION);
 			}
 		});
 
-		stage.addActor(mask);
-		stage.addActor(optionsBackground);
-		stage.addActor(returnButton);
+		Image instructionsButton = new Image(res.getTexture("instructions button"));
+		instructionsButton.layout();
+		instructionsButton.setBounds(levelSelectionButton.getX(),
+				levelSelectionButton.getY() - 50 - levelSelectionButton.getPrefHeight(),
+				levelSelectionButton.getImageWidth(), levelSelectionButton.getImageHeight());
+		instructionsButton.addListener(new InputListener(instructionsButton, true) {
+			@Override
+			public void doAction() {
+				new InfoScreen(levelState.getGameStateManager()).addToStage();
+			}
+		});
+
+		Image backToGameButton = new Image(res.getTexture("back to game"));
+		backToGameButton.layout();
+		backToGameButton.setBounds(instructionsButton.getX(),
+				instructionsButton.getY() - 50 - instructionsButton.getHeight(),
+				backToGameButton.getImageWidth(), backToGameButton.getImageHeight());
+		backToGameButton.addListener(new InputListener(backToGameButton, true) {
+			@Override
+			public void doAction() {
+				options.remove();
+			}
+		});
+
+		options.addActor(mask);
+		options.addActor(optionsBackground);
+		options.addActor(levelSelectionButton);
+		options.addActor(instructionsButton);
+		options.addActor(backToGameButton);
+
+		stage.addActor(options);
 	}
 
 	public void setEditButtonsPressed() {

@@ -2,30 +2,37 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.bounded.gamestates;
+package com.jnv.bounded.popups;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.jnv.bounded.handlers.GameStateManager;
 import com.jnv.bounded.main.Bounded;
+import com.jnv.bounded.resources.BoundedAssetManager;
 import com.jnv.bounded.scene2d.InputListener;
 
-public class InfoScreen extends GameState {
+public class InfoScreen {
 
+	private BoundedAssetManager res;
 	private int page = 0;
 	private ScrollPane scrollPane;
 	private Table table;
 	private Label label;
+	private Group infoScreen;
+	private Stage stage;
 
 	public InfoScreen(final GameStateManager gsm) {
-		super(gsm);
+		res = gsm.game().res;
+		stage = gsm.game().getStage();
 
+		infoScreen = new Group();
+		infoScreen.addActor(new Image(res.getTexture("total black background")));
 		table = new Table();
-		table.add(new Image(game.res.getTexture("infopage1")));
+		table.add(new Image(res.getTexture("infopage1")));
 		table.layout();
 		table.setBounds(0, 0, Bounded.WIDTH, Bounded.HEIGHT);
 		scrollPane = new ScrollPane(table);
@@ -33,18 +40,18 @@ public class InfoScreen extends GameState {
 		scrollPane.layout();
 		scrollPane.setZIndex(0);
 		scrollPane.setScrollingDisabled(true, false);
-		stage.addActor(scrollPane);
+		infoScreen.addActor(scrollPane);
 
-		Image xButton = new Image(game.res.getTexture("x"));
+		Image xButton = new Image(res.getTexture("x"));
 		xButton.layout();
 		xButton.setBounds(Bounded.WIDTH - 100, Bounded.HEIGHT - 100, 100, 100);
 		xButton.addListener(new InputListener(xButton) {
 			@Override
 			public void doAction() {
-				gsm.setState(GameStateManager.State.LEVELSELECTION);
+				infoScreen.remove();
 			}
 		});
-		stage.addActor(xButton);
+		infoScreen.addActor(xButton);
 
 		addArrowButtons();
 
@@ -52,23 +59,8 @@ public class InfoScreen extends GameState {
 		label.setBounds((Bounded.WIDTH - label.getPrefWidth()) / 2,
 				(100 - label.getPrefHeight()) / 2, label.getPrefWidth(), label.getPrefHeight());
 		label.layout();
-		stage.addActor(label);
+		infoScreen.addActor(label);
 		setInfoPage(0);
-	}
-
-	public void update(float dt) {
-		stage.act(dt);
-	}
-
-	public void handleInput() {
-
-	}
-
-	public void render() {
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		stage.draw();
 	}
 
 	public void dispose() {
@@ -76,7 +68,7 @@ public class InfoScreen extends GameState {
 	}
 
 	private void addArrowButtons() {
-		Image left_arrow = new Image(game.res.getTexture("left_arrow"));
+		Image left_arrow = new Image(res.getTexture("left_arrow"));
 		left_arrow.layout();
 		left_arrow.setBounds(100, 12.5f, 200 * 3 / 4, 100 * 3 / 4);
 		left_arrow.addListener(new InputListener(left_arrow) {
@@ -85,9 +77,9 @@ public class InfoScreen extends GameState {
 				prevPage();
 			}
 		});
-		stage.addActor(left_arrow);
+		infoScreen.addActor(left_arrow);
 
-		Image right_arrow = new Image(game.res.getTexture("right_arrow"));
+		Image right_arrow = new Image(res.getTexture("right_arrow"));
 		right_arrow.layout();
 		right_arrow.setBounds(Bounded.WIDTH - left_arrow.getWidth() - left_arrow.getX(),
 				left_arrow.getY(), left_arrow.getWidth(), left_arrow.getHeight());
@@ -97,7 +89,11 @@ public class InfoScreen extends GameState {
 				nextPage();
 			}
 		});
-		stage.addActor(right_arrow);
+		infoScreen.addActor(right_arrow);
+	}
+
+	public void addToStage() {
+		stage.addActor(infoScreen);
 	}
 
 	// Helpers
@@ -118,7 +114,7 @@ public class InfoScreen extends GameState {
 	// Setters
 	private void setInfoPage(int page) {
 		table.clearChildren();
-		table.add(new Image(game.res.getTexture("infopage" + (page + 1))));
+		table.add(new Image(res.getTexture("infopage" + (page + 1))));
 		scrollPane.scrollTo(0, scrollPane.getMaxY(), Bounded.WIDTH, Bounded.HEIGHT - 100);
 		scrollPane.setVelocityY(0);
 		label.setText("Page " + (page + 1) + "/3");

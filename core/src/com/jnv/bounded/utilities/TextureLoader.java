@@ -77,6 +77,7 @@ public class TextureLoader {
 	}
 
 	private void loadBackground() {
+		bounded.res.loadTexture("backgrounds/total_black_background.png", "total black background");
 		bounded.res.loadTexture("backgrounds/blue1920x1080.png", "blue background");
 		bounded.res.loadTexture("backgrounds/green1920x1080.png", "green background");
 		bounded.res.loadTexture("backgrounds/orange1920x1080.png", "orange background");
@@ -98,6 +99,8 @@ public class TextureLoader {
 	}
 
 	private void loadHUDButtons() {
+		bounded.res.loadTexture("game_images/instruction_button612x144.png", "instructions button");
+		bounded.res.loadTexture("game_images/back_to_game_button612x144.png", "back to game");
 		bounded.res.loadTexture("game_images/level_complete800x400.png", "level_complete_window");
 		bounded.res.loadTexture("game_images/next_level256x144.png", "next_level");
 		bounded.res.loadTexture("game_images/level_select_button256x144.png", "level_select_button");
