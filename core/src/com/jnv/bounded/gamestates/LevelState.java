@@ -184,10 +184,9 @@ public class LevelState extends GameState {
 
 	private void loadFont() {
 		FreeTypeFontGenerator generator =
-				new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
-		distanceFont = generator.generateFont(15);
+				new FreeTypeFontGenerator(Gdx.files.internal("fonts/Rajdhani-Regular.ttf"));
+		distanceFont = generator.generateFont(55);
 		distanceFont.setColor(Color.WHITE);
-		distanceFont.getData().scale(2f);
 	}
 
 	// Helpers

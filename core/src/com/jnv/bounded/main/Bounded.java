@@ -95,7 +95,7 @@ public class Bounded extends Game {
 		stretchViewport.apply();
 		stage = new Stage(stretchViewport, sb);
 		camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
-		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
+		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Rajdhani-Regular.ttf"));
 		res = new BoundedAssetManager();
 		textureLoader = new TextureLoader(this);
 		LevelDistances.loadDistances();
